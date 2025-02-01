@@ -1,42 +1,117 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+.Zcard {
+  position: relative;
+
+  cursor: pointer;
+  transition: all 120ms;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5em;
+  padding-bottom: 3.4em;
+}
+
+.Zcard::after {
+  content: "See Details";
   text-align: center;
+  padding-top: 1.25em;
+  padding-left: 1.25em;
+  padding-bottom: 2.25em;
+  position: absolute;
+  left: 0;
+  bottom: -80px;
+  background: #29b6f6;
+  color: #fff;
+  height: 2.5em;
+  width: 100%;
+  transition: all 80ms;
+  font-weight: 600;
+
+  opacity: 0;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.Zcard .title {
+  position: absolute;
+  left: 0.625em;
+  bottom: 1.875em;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.Zcard .price {
+  position: absolute;
+  left: 0.625em;
+  bottom: 0.625em;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.Zcard:hover::after {
+  bottom: 0;
+  opacity: 1;
 }
 
-.card {
-  padding: 2em;
+.Zcard:active {
+  transform: scale(0.98);
 }
 
-.read-the-docs {
-  color: #888;
+.Zcard:active::after {
+  content: "Browsing Product !";
+}
+
+.Zimage {
+  background: #fff;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+}
+.tooltip {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.tooltip button {
+  background-color: #29b6f6;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s ease-out;
+}
+
+.tooltip button:hover {
+  background-color: #b92929;
+  transform: scale(1.05);
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
+.tooltiptext {
+  visibility: hidden;
+  width: 160px;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  border-radius: 8px;
+  padding: 5px;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -80px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #333 transparent transparent transparent;
 }

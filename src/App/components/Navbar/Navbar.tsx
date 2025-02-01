@@ -1,4 +1,3 @@
-import { useState } from "react";
 import {
   AppBar,
   Toolbar,
@@ -12,11 +11,13 @@ import {
   ListItem,
   ListItemText,
 } from "@mui/material";
+import React, { useState } from "react";
 import logo from "../../../assets/logo.webp";
 import { Menu as MenuIcon, AccountCircle } from "@mui/icons-material";
 import { NavLink } from "react-router-dom";
+import type { MouseEvent as ReactMouseEvent } from "react";
 
-function ResponsiveNavMenu() {
+function NavBar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -24,7 +25,7 @@ function ResponsiveNavMenu() {
     setMobileOpen(!mobileOpen);
   };
 
-  const handleProfileMenuOpen = (event) => {
+  const handleProfileMenuOpen = (event: ReactMouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
 
@@ -46,6 +47,14 @@ function ResponsiveNavMenu() {
       name: "Contact",
       path: "contact",
     },
+    {
+      name: "Login",
+      path: "login",
+    },
+    {
+      name: "Register",
+      path: "register",
+    },
   ];
 
   const drawer = (
@@ -54,14 +63,11 @@ function ResponsiveNavMenu() {
       sx={{ textAlign: "center", color: "#424242", borderRadius: "20px" }}
     >
       <img src={logo} alt="logo" className="w-10 h-10" />
-
       <List>
         {menuItems.map((item) => (
-          <NavLink to={`${item.path}`} key={item.name}>
-            <ListItem button key={item.name}>
-              <ListItemText primary={item.name} />
-            </ListItem>
-          </NavLink>
+          <ListItem key={item.name} button component={NavLink} to={item.path}>
+            <ListItemText primary={item.name} />
+          </ListItem>
         ))}
       </List>
     </Box>
@@ -71,9 +77,12 @@ function ResponsiveNavMenu() {
     <Box sx={{ display: "flex" }}>
       <AppBar
         component="nav"
+        className="
+        h-full w-full !bg-transparent !rounded-md !bg-clip-padding !backdrop-filter backdrop-blur-[10px]  !bg-opacity-10
+        "
         sx={{
-          backgroundColor: "#fff8e1",
           color: "#424242",
+          // backgroundColor: "#fff8e1",
           height: "80px",
           fontSize: "20px",
           fontWeight: "500",
@@ -102,7 +111,7 @@ function ResponsiveNavMenu() {
             aria-label="open drawer"
             edge="start"
             onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { sm: "none" } }}
+            sx={{ mr: 2, display: { md: "none" } }}
           >
             <MenuIcon />
           </IconButton>
@@ -126,7 +135,7 @@ function ResponsiveNavMenu() {
           <Box
             sx={{
               flexGrow: 1,
-              display: { xs: "none", sm: "flex" },
+              display: { xs: "none", md: "flex" },
               justifyContent: "center",
               gap: "40px",
             }}
@@ -154,7 +163,7 @@ function ResponsiveNavMenu() {
             color="inherit"
             onClick={handleProfileMenuOpen}
             sx={{
-              display: { xs: "none", sm: "flex" },
+              display: { xs: "none", md: "flex" },
               justifyContent: "center",
               alignItems: "center",
               width: 54,
@@ -192,7 +201,7 @@ function ResponsiveNavMenu() {
             keepMounted: true,
           }}
           sx={{
-            display: { xs: "block", sm: "none" },
+            display: { xs: "block", md: "none" },
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
               width: 240,
@@ -206,4 +215,4 @@ function ResponsiveNavMenu() {
   );
 }
 
-export default ResponsiveNavMenu;
+export default NavBar;
