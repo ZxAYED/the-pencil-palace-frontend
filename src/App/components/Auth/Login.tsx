@@ -56,7 +56,15 @@ const Login = () => {
 
             <Box className="flex items-center py-[16px] space-x-[8px]">
               <Box className="flex-1 h-[1px] bg-[#e0e0e0]"></Box>
-              <Typography className="text-[14px]">
+              <Typography
+                sx={{
+                  fontSize: {
+                    xs: "11px",
+                    sm: "14px",
+                  },
+                }}
+                className="text-[14px]"
+              >
                 Login with social accounts
               </Typography>
               <Box className="flex-1 h-[1px] bg-[#e0e0e0]"></Box>
@@ -73,13 +81,29 @@ const Login = () => {
               </Button>
             </Box>
 
-            <Typography className="text-center pt-[16px]">
+            <Typography
+              sx={{
+                fontSize: {
+                  xs: "11px",
+                  sm: "14px",
+                },
+              }}
+              className="text-center pt-[16px]"
+            >
               Don&apos;t have an account?
               <Link to="/register" className="underline text-[#29b6f6]">
                 Sign up
               </Link>
             </Typography>
-            <Box className="tooltip flex justify-center items-center !mt-[16px]">
+            <Box
+              sx={{
+                fontSize: {
+                  xs: "11px",
+                  sm: "14px",
+                },
+              }}
+              className="tooltip flex justify-center items-center !mt-[16px]"
+            >
               Hover on this for admin info
               <Box className="tooltiptext">
                 <Box className="!my-[4px]"> Email : zayed@zayed.com </Box>

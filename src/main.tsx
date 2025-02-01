@@ -4,6 +4,7 @@ import "./index.css";
 import { createTheme, ThemeProvider, CssBaseline } from "@mui/material";
 import { RouterProvider } from "react-router-dom";
 import routes from "./App/routes/routes";
+import { ParallaxProvider } from "react-scroll-parallax";
 
 const customTheme = createTheme({
   typography: {
@@ -46,9 +47,11 @@ const customTheme = createTheme({
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <ThemeProvider theme={customTheme}>
-      <CssBaseline />
-      <RouterProvider router={routes} />
-    </ThemeProvider>
+    <ParallaxProvider>
+      <ThemeProvider theme={customTheme}>
+        <CssBaseline />
+        <RouterProvider router={routes} />
+      </ThemeProvider>
+    </ParallaxProvider>
   </StrictMode>
 );

@@ -60,7 +60,15 @@ const Register = () => {
               </Button>
             </Box>
 
-            <Typography className="text-[8px] text-center pt-[16px]">
+            <Typography
+              className="text-[8px] text-center pt-[16px]"
+              sx={{
+                fontSize: {
+                  xs: "11px",
+                  sm: "14px",
+                },
+              }}
+            >
               Already have an account?
               <Link to="/login" className="underline text-[#29b6f6]">
                 Login

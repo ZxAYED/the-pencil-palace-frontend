@@ -1,6 +1,5 @@
 .Zcard {
   position: relative;
-
   cursor: pointer;
   transition: all 120ms;
   display: flex;

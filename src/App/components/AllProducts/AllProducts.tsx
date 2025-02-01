@@ -1,7 +1,15 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Pagination, Typography } from "@mui/material";
 import Card from "../../utils/Card";
+import { useState } from "react";
 
 const AllProducts = () => {
+  const [page, setPage] = useState(1);
+
+  const handleChange = (event: number, value: number) => {
+    setPage(value);
+    console.log(value);
+  };
+
   return (
     <>
       <Box sx={{ maxWidth: "1280px", mx: "auto", my: "24px" }}>
@@ -30,6 +38,9 @@ const AllProducts = () => {
           <Card></Card>
           <Card></Card>
           <Card></Card>
+        </Box>
+        <Box sx={{ display: "flex", justifyContent: "center", mt: 3 }}>
+          <Pagination count={10} page={page} onChange={handleChange} />
         </Box>
       </Box>
     </>

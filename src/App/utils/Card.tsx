@@ -2,7 +2,15 @@ import { Box } from "@mui/material";
 
 const Card = () => {
   return (
-    <Box className="flex flex-col  gap-4 h-[500px] w-[420px] border-2 border-[#2e2e2e] Zcard  rounded-[8px]">
+    <Box
+      sx={{
+        width: {
+          xs: "360px",
+          md: "420px",
+        },
+      }}
+      className="flex flex-col  gap-4 h-[500px] w-[420px] border-2 border-[#2e2e2e] Zcard  rounded-[8px] !box-border"
+    >
       <div className="bg-white w-[384px] shadow-xl rounded-[16px] overflow-hidden  p-[20px] space-y-[16px] Ztitle">
         <figure className="relative">
           <img
@@ -14,7 +22,7 @@ const Card = () => {
         <div className="p-[20px] space-y-[16px] Ztitle">
           <h2 className="text-[24px] font-[700] flex items-center Ztitle">
             Shoes!
-            <span className="bg-[#6c63ff] text-white ml-[12px] px-[8px] py-[4px] text-[12px] rounded-[8px] Ztitle">
+            <span className="bg-[#29b6f6] text-white ml-[12px] px-[8px] py-[4px] text-[12px] rounded-[8px] Ztitle">
               NEW
             </span>
           </h2>
