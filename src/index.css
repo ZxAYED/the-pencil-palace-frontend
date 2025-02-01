@@ -1,0 +1,52 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url("https://fonts.googleapis.com/css2?family=Anonymous+Pro:ital,wght@0,400;0,700;1,400;1,700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100..900;1,100..900&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap");
+
+body {
+  background-color: #fff8e1;
+  color: #424242;
+  font-family: "Poppins";
+  font-weight: 400;
+}
+
+.Zbutton {
+  position: relative;
+  background-color: transparent;
+  cursor: pointer;
+  overflow: hidden;
+  border-radius: 30px;
+  color: #424242;
+  font-weight: 800;
+  transition: all 0.5s ease-in-out;
+}
+
+.Zbtn-txt {
+  z-index: 1;
+  font-weight: 800;
+  letter-spacing: 3px;
+}
+
+.Ztype1::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  transition: all 0.5s ease-in-out;
+  background-color: #424242;
+  border-radius: 30px;
+  visibility: hidden;
+  height: 10px;
+  width: 10px;
+  z-index: -1;
+}
+
+.Zbutton:hover {
+  color: #fff;
+  border: none;
+}
+
+.Ztype1:hover::after {
+  visibility: visible;
+  transform: scale(100) translateX(2px);
+}
