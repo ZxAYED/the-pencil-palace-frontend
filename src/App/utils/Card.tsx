@@ -6,7 +6,7 @@ const Card = () => {
       sx={{
         width: {
           xs: "360px",
-          md: "420px",
+          lg: "420px",
         },
       }}
       className="flex flex-col  gap-4 h-[500px] w-[420px] border-2 border-[#2e2e2e] Zcard  rounded-[8px] !box-border"

@@ -149,26 +149,53 @@ const AboutUs = () => {
             </Box>
           </Box>
         </motion.div>
-        <img src={img} alt="Zayed Iqbal" className="w-[20%] h-[20%] " />
+        <Box
+          sx={{
+            my: {
+              sm: "-24px",
+            },
+          }}
+          className="flex justify-center items-center w-[20%] h-[20%]"
+        >
+          <img
+            src={img}
+            alt="Zayed Iqbal"
+            className="  drop-shadow-[0_0_10px_rgba(0,0,0,0.5)]"
+          />
+        </Box>
       </Box>
-      <motion.div
-        className="!mt-[32px] sm:!mt-[48px] "
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1 }}
+      <Box
+        sx={{
+          mb: {
+            md: "48px",
+          },
+        }}
       >
-        <Link to="/all-products">
-          <Button
-            variant="contained"
-            color="primary"
-            size="large"
-            className="text-white !mt-[-10px] !mb-[16px]"
-            style={{ backgroundColor: "#424242" }}
-          >
-            Explore Our Shop
-          </Button>
-        </Link>
-      </motion.div>
+        <motion.div
+          className="  "
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1 }}
+        >
+          <Link to="/all-products">
+            <Button
+              variant="contained"
+              color="primary"
+              size="large"
+              sx={{
+                my: {
+                  xs: "20px",
+                  md: "-20px",
+                },
+              }}
+              className="text-white "
+              style={{ backgroundColor: "#424242" }}
+            >
+              Explore Our Shop
+            </Button>
+          </Link>
+        </motion.div>
+      </Box>
     </Box>
   );
 };
