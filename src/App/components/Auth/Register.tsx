@@ -1,17 +1,45 @@
 import { FieldValues, SubmitHandler } from "react-hook-form";
 import ZForm from "../../utils/ZForm";
-import { Button, Box, Typography, Input } from "@mui/material";
+import { Button, Box, Typography } from "@mui/material";
 
 import ZTextField from "../../utils/ZTextField";
-import { useForm } from "react-hook-form";
+
 import { Link } from "react-router-dom";
 import logo from "../../../assets/LOGIN.png";
+import { useRegisterMutation } from "../../Redux/features/Auth/authApi";
+import { toast } from "sonner";
 
 const Register = () => {
-  const { reset } = useForm();
-  const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    console.log(data);
-    reset();
+  const [register, { isLoading }] = useRegisterMutation();
+
+  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+    const toastId = toast.loading("Creating a new account");
+
+    const formData = new FormData();
+    formData.append("name", data.name);
+    formData.append("email", data.email);
+    formData.append("password", data.password);
+    formData.append("address", data.address);
+    formData.append("phone", data.phone);
+    console.log(data.profileImage);
+    if (!data.profileImage) {
+      return toast.error("Please upload a profile image", { id: toastId });
+    }
+
+    formData.append("profileImage", data.profileImage);
+    try {
+      const res = await register(formData);
+      console.log(res);
+      if (!res?.data?.success) {
+        toast.error(res?.data?.message, { id: toastId });
+        console.log(res);
+      } else {
+        toast.success("Account created successfully", { id: toastId });
+      }
+    } catch (err) {
+      toast.error("Something went wrong", { id: toastId });
+      console.log(err);
+    }
   };
   return (
     <Box
@@ -48,7 +76,11 @@ const Register = () => {
                 <ZTextField name="phone" label="Phone Number" type="text" />
               </Box>
               <Box className="space-y-[8px]">
-                <Input name="profileImage" type="file" />
+                <ZTextField
+                  name="profileImage"
+                  label="Profile Image"
+                  type="file"
+                />
               </Box>
               <Button
                 type="submit"
@@ -69,7 +101,7 @@ const Register = () => {
                 },
               }}
             >
-              Already have an account?
+              Already have an account ?
               <Link to="/login" className="underline text-[#29b6f6]">
                 Login
               </Link>

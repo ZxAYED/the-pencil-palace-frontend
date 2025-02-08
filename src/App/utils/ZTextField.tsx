@@ -16,15 +16,22 @@ const ZTextField = ({
     <Controller
       control={control}
       name={name}
-      render={({ field }) => (
+      render={({ field: { onChange, value, ...field } }) => (
         <TextField
-          className=" "
           {...field}
           id={name}
           label={label}
           type={type}
           variant="standard"
           fullWidth
+          value={value?.fileName}
+          onChange={(e) => {
+            if (type === "file") {
+              onChange(e.target.files?.[0]);
+            } else {
+              onChange(e.target.value);
+            }
+          }}
         />
       )}
     />

@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import Badge, { badgeClasses } from "@mui/material/Badge";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCartOutlined";
 import {
   AppBar,
   Toolbar,
@@ -10,22 +13,30 @@ import {
   List,
   ListItem,
   ListItemText,
+  styled,
 } from "@mui/material";
-import React, { useState } from "react";
+
 import logo from "../../../assets/logo.webp";
 import { Menu as MenuIcon, AccountCircle } from "@mui/icons-material";
 import { NavLink } from "react-router-dom";
-import type { MouseEvent as ReactMouseEvent } from "react";
+import { useState } from "react";
 
 function NavBar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
+  const [count, setCount] = useState<number>(0);
 
+  const CartBadge = styled(Badge)`
+    & .${badgeClasses.badge} {
+      top: -12px;
+      right: -6px;
+    }
+  `;
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
 
-  const handleProfileMenuOpen = (event: ReactMouseEvent<HTMLElement>) => {
+  const handleProfileMenuOpen = (event: any) => {
     setAnchorEl(event.currentTarget);
   };
 
@@ -43,18 +54,6 @@ function NavBar() {
       name: "About",
       path: "about",
     },
-    {
-      name: "Contact",
-      path: "contact",
-    },
-    {
-      name: "Login",
-      path: "login",
-    },
-    {
-      name: "Register",
-      path: "register",
-    },
   ];
 
   const drawer = (
@@ -62,10 +61,10 @@ function NavBar() {
       onClick={handleDrawerToggle}
       sx={{ textAlign: "center", color: "#424242", borderRadius: "20px" }}
     >
-      <img src={logo} alt="logo" className="w-10 h-10" />
+      <img src={logo} alt="logo" className="w-[100%] h-[40dvh]" />
       <List>
         {menuItems.map((item) => (
-          <ListItem key={item.name} button component={NavLink} to={item.path}>
+          <ListItem key={item.name} button component={NavLink} to={item?.path}>
             <ListItemText primary={item.name} />
           </ListItem>
         ))}
@@ -78,7 +77,7 @@ function NavBar() {
       <AppBar
         component="nav"
         className="
-        h-full w-full !bg-transparent !rounded-md !bg-clip-padding !backdrop-filter backdrop-blur-[10px]  !bg-opacity-10
+        h-full w-[100%] !bg-transparent !rounded-md !bg-clip-padding !backdrop-filter backdrop-blur-[10px]  !bg-opacity-10 box-border
         "
         sx={{
           color: "#424242",
@@ -120,12 +119,17 @@ function NavBar() {
             sx={{
               display: "flex",
               alignItems: "center",
+              justifyContent: "center",
             }}
           >
-            <NavLink to="/">
+            <NavLink to="/" className="no-underline">
               <Box
-                sx={{ cursor: "pointer" }}
-                className=" text-[24px] font-[900] "
+                sx={{
+                  cursor: "pointer",
+                  textDecoration: "none",
+                  color: "#424242",
+                }}
+                className=" !text-[24px] !font-[900]  !text-primary no-underline"
               >
                 The Pencil Palace
               </Box>
@@ -137,7 +141,8 @@ function NavBar() {
               flexGrow: 1,
               display: { xs: "none", md: "flex" },
               justifyContent: "center",
-              gap: "40px",
+              gap: "80px",
+              alignItems: "center",
             }}
           >
             {menuItems.map((item) => (
@@ -148,13 +153,23 @@ function NavBar() {
                     color: "#424242",
                     fontWeight: "500",
                     borderColor: "#424242",
-                    fontSize: "16px",
+                    fontSize: "18px",
                   }}
                 >
                   {item.name}
                 </Button>
               </NavLink>
             ))}
+            <Box>
+              <IconButton>
+                <ShoppingCartIcon fontSize="medium" />
+                <CartBadge
+                  badgeContent={count}
+                  color="primary"
+                  overlap="circular"
+                />
+              </IconButton>
+            </Box>
           </Box>
 
           <IconButton
@@ -169,6 +184,11 @@ function NavBar() {
               width: 54,
               height: 54,
               p: 1,
+              boxSizing: "border-box",
+              marginRight: {
+                md: "10px",
+                xl: "0px",
+              },
             }}
           >
             <AccountCircle sx={{ fontSize: 40 }} />
@@ -203,7 +223,6 @@ function NavBar() {
           sx={{
             display: { xs: "block", md: "none" },
             "& .MuiDrawer-paper": {
-              boxSizing: "border-box",
               width: 240,
             },
           }}

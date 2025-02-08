@@ -19,7 +19,11 @@ const FAQAccordion = () => {
 
   return (
     <Box className="max-w-[1280px] !mt-[140px] !mx-auto">
-      <Typography variant="h4" className="text-center !mb-[16px]">
+      <Typography
+        className="!text-[18px] !font-[500]"
+        variant="h4"
+        className="text-center !mb-[16px]"
+      >
         Frequently Asked Questions
       </Typography>
       <Accordion
@@ -34,12 +38,13 @@ const FAQAccordion = () => {
           aria-controls="panel1-content"
           id="panel1-header"
         >
-          <Typography component="span">
+          <Typography className="!text-[18px] !font-[500]" component="span">
             What types of stationery products do you offer?
           </Typography>
         </AccordionSummary>
+
         <AccordionDetails>
-          <Typography>
+          <Typography className="!text-[18px] !font-[500]">
             We offer a wide variety of stationery products, including premium
             pens, notebooks, journals, art supplies, office accessories, and
             much more!
@@ -57,12 +62,12 @@ const FAQAccordion = () => {
           aria-controls="panel2-content"
           id="panel2-header"
         >
-          <Typography component="span">
+          <Typography className="!text-[18px] !font-[500]" component="span">
             Do you offer bulk discounts for businesses?
           </Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Typography>
+          <Typography className="!text-[18px] !font-[500]">
             Yes! We provide bulk discounts for schools, offices, and businesses.
             Contact our sales team for a custom quote.
           </Typography>
@@ -79,10 +84,12 @@ const FAQAccordion = () => {
           aria-controls="panel3-content"
           id="panel3-header"
         >
-          <Typography component="span">What is your return policy?</Typography>
+          <Typography className="!text-[18px] !font-[500]" component="span">
+            What is your return policy?
+          </Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Typography>
+          <Typography className="!text-[18px] !font-[500]">
             We offer a 30-day hassle-free return policy. Products must be in
             their original condition and packaging. Contact customer service for
             assistance.
@@ -100,10 +107,12 @@ const FAQAccordion = () => {
           aria-controls="panel4-content"
           id="panel4-header"
         >
-          <Typography component="span">How long does shipping take?</Typography>
+          <Typography className="!text-[18px] !font-[500]" component="span">
+            How long does shipping take?
+          </Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Typography>
+          <Typography className="!text-[18px] !font-[500]">
             Standard shipping typically takes 3-7 business days. Expedited
             shipping options are available at checkout.
           </Typography>

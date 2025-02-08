@@ -52,7 +52,11 @@ const Categories = () => {
               transition={{ ease: "easeOut" }}
               className=" overflow-hidden"
             >
-              <img src={img1} className="rounded-[50%]" alt="writing" />
+              <img
+                src={img1}
+                className="rounded-[50%] h-[200px] w-[200px]"
+                alt="writing"
+              />
             </motion.div>
 
             <Typography variant="h6" className="text-center">
@@ -66,7 +70,11 @@ const Categories = () => {
               transition={{ ease: "easeOut" }}
               className=" overflow-hidden"
             >
-              <img src={img2} className="rounded-[50%]" alt="office supplies" />
+              <img
+                src={img2}
+                className="rounded-[50%] h-[200px] w-[200px]"
+                alt="office supplies"
+              />
             </motion.div>
             <Typography variant="h6" className="text-center">
               Office Supplies
@@ -79,7 +87,11 @@ const Categories = () => {
               transition={{ ease: "easeOut" }}
               className=" overflow-hidden"
             >
-              <img src={img3} className="rounded-[50%]" alt="art supplies" />
+              <img
+                src={img3}
+                className="rounded-[50%] h-[200px] w-[200px]"
+                alt="art supplies"
+              />
             </motion.div>
             <Typography variant="h6" className="text-center">
               Art Supplies
@@ -92,7 +104,11 @@ const Categories = () => {
               transition={{ ease: "easeOut" }}
               className=" overflow-hidden"
             >
-              <img src={img4} className="rounded-[50%]" alt="technology" />
+              <img
+                src={img4}
+                className="rounded-[50%] h-[200px] w-[200px]"
+                alt="technology"
+              />
             </motion.div>
             <Typography variant="h6" className="text-center">
               Technology
@@ -105,7 +121,11 @@ const Categories = () => {
               transition={{ ease: "easeOut" }}
               className=" overflow-hidden"
             >
-              <img src={img5} className="rounded-[50%]" alt="educational" />
+              <img
+                src={img5}
+                className="rounded-[50%] h-[200px] w-[200px]"
+                alt="educational"
+              />
             </motion.div>
             <Typography variant="h6" className="text-center">
               Educational

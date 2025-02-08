@@ -5,7 +5,9 @@ import { createTheme, ThemeProvider, CssBaseline } from "@mui/material";
 import { RouterProvider } from "react-router-dom";
 import routes from "./App/routes/routes";
 import { ParallaxProvider } from "react-scroll-parallax";
-
+import { Toaster } from "sonner";
+import { Provider } from "react-redux";
+import { store } from "./App/Redux/store";
 const customTheme = createTheme({
   typography: {
     fontFamily:
@@ -47,11 +49,22 @@ const customTheme = createTheme({
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <ParallaxProvider>
-      <ThemeProvider theme={customTheme}>
-        <CssBaseline />
-        <RouterProvider router={routes} />
-      </ThemeProvider>
-    </ParallaxProvider>
+    <Provider store={store}>
+      <ParallaxProvider>
+        <ThemeProvider theme={customTheme}>
+          <CssBaseline />
+          <RouterProvider router={routes} />
+          <Toaster
+            toastOptions={{
+              style: {
+                background: "#fff8e1",
+                color: "#424242",
+              },
+              className: "class",
+            }}
+          />
+        </ThemeProvider>
+      </ParallaxProvider>
+    </Provider>
   </StrictMode>
 );

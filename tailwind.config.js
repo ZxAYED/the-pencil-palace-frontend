@@ -38,6 +38,6 @@ export default {
       },
     },
   },
-  important: true, // This makes Tailwind styles override Material UI
+  important: true,
   plugins: [],
 };

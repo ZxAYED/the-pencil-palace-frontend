@@ -90,25 +90,35 @@ const Login = () => {
               }}
               className="text-center pt-[16px]"
             >
-              Don&apos;t have an account?
+              Don&apos;t have an account ?
               <Link to="/register" className="underline text-[#29b6f6]">
                 Sign up
               </Link>
             </Typography>
             <Box
               sx={{
-                fontSize: {
-                  xs: "11px",
-                  sm: "14px",
-                },
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
               }}
-              className="tooltip flex justify-center items-center !mt-[16px]"
             >
-              Hover on this for admin info
-              <Box className="tooltiptext">
-                <Box className="!my-[4px]"> Email : zayed@zayed.com </Box>
-                <Box className="!my-[4px]">Pass: zayed234</Box>
-              </Box>
+              <Button
+                variant="outlined"
+                sx={{
+                  fontSize: {
+                    xs: "11px",
+                    sm: "14px",
+                    color: "#fff8e1",
+                  },
+                }}
+                className="tooltip flex justify-center items-center !mt-[16px] "
+              >
+                Hover on this for admin login
+                <Box className="tooltiptext ">
+                  <Box className="!my-[4px]"> Email : zayed@zayed.com </Box>
+                  <Box className="!my-[4px]">Pass: zayed234</Box>
+                </Box>
+              </Button>
             </Box>
           </Box>
         </Box>

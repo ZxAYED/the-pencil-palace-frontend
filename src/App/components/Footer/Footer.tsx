@@ -35,7 +35,7 @@ const Footer = () => {
           <Box sx={{ textAlign: "center", flex: "1 1 22%" }}>
             <Typography variant="body1">
               <Link href="#" underline="hover" sx={{ color: "#FFF8E1" }}>
-                Contact
+                Contact us
               </Link>
             </Typography>
           </Box>
@@ -60,13 +60,13 @@ const Footer = () => {
           justifyContent="space-between"
           sx={{ mt: 3, mb: 3 }}
         >
-          <IconButton sx={{ color: "#29b6f6" }} href="https://facebook.com">
+          <IconButton sx={{ color: "#fff8e1" }} href="https://facebook.com">
             <Facebook />
           </IconButton>
-          <IconButton sx={{ color: "#29b6f6" }} href="https://twitter.com">
+          <IconButton sx={{ color: "#fff8e1" }} href="https://twitter.com">
             <Twitter />
           </IconButton>
-          <IconButton sx={{ color: "#29b6f6" }} href="https://instagram.com">
+          <IconButton sx={{ color: "#fff8e1" }} href="https://instagram.com">
             <Instagram />
           </IconButton>
         </Box>
@@ -76,7 +76,9 @@ const Footer = () => {
         <Box sx={{ textAlign: "center" }}>
           <Typography variant="body2" sx={{ color: "#FFF8E1" }}>
             Copyright © {new Date().getFullYear()} - All rights reserved by
-            <Typography className="!font-[600]"> ZxAYED</Typography>
+            <Typography className="!font-[600] text-[#29b6f6]">
+              ZxAYED
+            </Typography>
           </Typography>
         </Box>
       </Container>
