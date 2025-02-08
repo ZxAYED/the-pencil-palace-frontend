@@ -5,10 +5,18 @@ import About from "../components/About/About";
 import Register from "../components/Auth/Register";
 import Login from "../components/Auth/Login";
 import AllProducts from "../components/AllProducts/AllProducts";
+import AdminDashboard from "../components/AdminDashboard/AdminDashboard";
+import PrivateRoute from "../components/Private/PrivateRoutes";
+import CreateProduct from "../components/AdminDashboard/CreateProduct";
+import AdminLayout from "../components/Layout/AdminLayout";
+import GetAllProducts from "../components/AdminDashboard/GetAllProducts";
+import DeleteProduct from "../components/AdminDashboard/DeleteProduct";
+import UpdateProduct from "../components/AdminDashboard/UpdateProduct";
 
 const routes = createBrowserRouter([
   {
     path: "/",
+
     element: <App />,
     children: [
       {
@@ -16,12 +24,72 @@ const routes = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "about",
+        path: "/about",
         element: <About />,
       },
       {
-        path: "all-products",
+        path: "/all-products",
         element: <AllProducts />,
+      },
+    ],
+  },
+  {
+    path: "/admin/dashboard",
+    element: (
+      <PrivateRoute>
+        <AdminLayout />
+      </PrivateRoute>
+    ),
+    children: [
+      {
+        path: "/admin/dashboard",
+        element: (
+          <PrivateRoute>
+            <AdminDashboard />
+          </PrivateRoute>
+        ),
+      },
+
+      {
+        path: "/admin/dashboard/create-product",
+        element: (
+          <PrivateRoute>
+            <CreateProduct />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/admin/dashboard/create-product",
+        element: (
+          <PrivateRoute>
+            <CreateProduct />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/admin/dashboard/all-products",
+        element: (
+          <PrivateRoute>
+            <GetAllProducts />
+          </PrivateRoute>
+        ),
+      },
+
+      {
+        path: "/admin/dashboard/delete-product",
+        element: (
+          <PrivateRoute>
+            <DeleteProduct />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/admin/dashboard/update-product",
+        element: (
+          <PrivateRoute>
+            <UpdateProduct />
+          </PrivateRoute>
+        ),
       },
     ],
   },

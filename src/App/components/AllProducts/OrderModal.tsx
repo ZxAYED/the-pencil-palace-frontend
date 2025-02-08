@@ -1,24 +1,30 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import Box from "@mui/material/Box";
+import Drawer from "@mui/material/Drawer";
 import Button from "@mui/material/Button";
-import Dialog, { DialogProps } from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
-import FormControl from "@mui/material/FormControl";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import Select, { SelectChangeEvent } from "@mui/material/Select";
-import Switch from "@mui/material/Switch";
+import List from "@mui/material/List";
+import Divider from "@mui/material/Divider";
+import ListItem from "@mui/material/ListItem";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import InboxIcon from "@mui/icons-material/MoveToInbox";
+import MailIcon from "@mui/icons-material/Mail";
+import * as React from "react";
+import Box from "@mui/material/Box";
 import { useState } from "react";
+
+import Badge, { badgeClasses } from "@mui/material/Badge";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCartOutlined";
+import { styled } from "@mui/material/styles";
+import { IconButton } from "@mui/material";
 import { Fragment } from "react/jsx-runtime";
+import ShoppingCartOutlined from "@mui/icons-material/ShoppingCartOutlined";
 
 export default function OrderModal() {
   const [open, setOpen] = useState(false);
-  const [fullWidth, setFullWidth] = useState(true);
-  const [maxWidth, setMaxWidth] = useState<DialogProps["maxWidth"]>("sm");
+
+  const [count, setCount] = useState<number>(2);
+
+  const anchor = "right";
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -28,73 +34,88 @@ export default function OrderModal() {
     setOpen(false);
   };
 
-  const handleMaxWidthChange = (event: SelectChangeEvent<typeof maxWidth>) => {
-    setMaxWidth(event.target.value);
-  };
+  const CartBadge = styled(Badge)`
+    & .${badgeClasses.badge} {
+      top: -12px;
+      right: -6px;
+    }
+  `;
 
-  const handleFullWidthChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setFullWidth(event.target.checked);
-  };
-
+  const list = () => (
+    <Box
+      sx={{
+        width: {
+          xs: 300,
+          sm: 500,
+          md: 700,
+        },
+      }}
+      role="presentation"
+      onClick={anchor}
+      onKeyDown={anchor}
+    >
+      <List>
+        {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
+          <ListItem key={text} disablePadding>
+            <ListItemButton>
+              <ListItemIcon>
+                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+              </ListItemIcon>
+              <ListItemText primary={text} />
+            </ListItemButton>
+          </ListItem>
+        ))}
+        <Button onClick={() => setCount(count + 1)}>Add</Button>
+        <Button onClick={() => setCount(count - 1)}>Remove</Button>
+      </List>
+      <Divider />
+      <List>
+        {["All mail", "Trash", "Spam"].map((text, index) => (
+          <ListItem key={text} disablePadding>
+            <ListItemButton>
+              <ListItemIcon>
+                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+              </ListItemIcon>
+              <ListItemText primary={text} />
+            </ListItemButton>
+          </ListItem>
+        ))}
+      </List>
+    </Box>
+  );
   return (
-    <Fragment>
-      <Button variant="outlined" onClick={handleClickOpen}>
-        Open max-width dialog
-      </Button>
-      <Dialog
-        fullWidth={fullWidth}
-        maxWidth={maxWidth}
-        open={open}
-        onClose={handleClose}
-      >
-        <DialogTitle>Optional sizes</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            You can set my maximum width and whether to adapt or not.
-          </DialogContentText>
-          <Box
-            noValidate
-            component="form"
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              m: "auto",
-              width: "fit-content",
-            }}
-          >
-            <FormControl sx={{ mt: 2, minWidth: 120 }}>
-              <InputLabel htmlFor="max-width">maxWidth</InputLabel>
-              <Select
-                autoFocus
-                value={maxWidth}
-                onChange={handleMaxWidthChange}
-                label="maxWidth"
-                inputProps={{
-                  name: "max-width",
-                  id: "max-width",
-                }}
-              >
-                <MenuItem value={false as any}>false</MenuItem>
-                <MenuItem value="xs">xs</MenuItem>
-                <MenuItem value="sm">sm</MenuItem>
-                <MenuItem value="md">md</MenuItem>
-                <MenuItem value="lg">lg</MenuItem>
-                <MenuItem value="xl">xl</MenuItem>
-              </Select>
-            </FormControl>
-            <FormControlLabel
-              sx={{ mt: 1 }}
-              control={
-                <Switch checked={fullWidth} onChange={handleFullWidthChange} />
-              }
-              label="Full width"
-            />
-          </Box>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>Close</Button>
-        </DialogActions>
-      </Dialog>
-    </Fragment>
+    <Box
+      sx={{
+        display: {
+          xs: "block",
+          md: "flex",
+        },
+        justifyContent: {
+          xs: "center",
+          sm: "flex-start",
+        },
+        alignItems: {
+          xs: "center",
+          md: "flex-start",
+        },
+        marginLeft: {
+          xs: "20px",
+          md: "0px",
+        },
+      }}
+    >
+      <IconButton onClick={handleClickOpen}>
+        <ShoppingCartIcon fontSize="medium" />
+
+        <CartBadge badgeContent={count} color="primary" overlap="circular" />
+      </IconButton>
+      <Box>
+        <Fragment key={anchor}>
+          <Drawer anchor={anchor} open={open} onClose={handleClose}>
+            {list()}
+          </Drawer>
+        </Fragment>
+      </Box>
+    </Box>
   );
 }

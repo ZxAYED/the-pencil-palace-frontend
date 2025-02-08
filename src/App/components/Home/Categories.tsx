@@ -32,16 +32,11 @@ const Categories = () => {
         </Typography>
         <Box
           sx={{
-            display: "grid",
-            gridTemplateColumns: {
-              xs: "repeat(1, 1fr)",
-              sm: "repeat(3, 1fr)",
-              md: "repeat(5, 1fr)",
-              lg: "repeat(5, 1fr)",
-            },
-            alignItems: "center",
+            display: "flex",
+            flexWrap: "wrap",
+            justifyContent: "center",
             gap: "24px",
-            alignContent: "center",
+            alignItems: "center",
           }}
           className="  !mv[-"
         >

@@ -3,16 +3,40 @@ import ZForm from "../../utils/ZForm";
 import { Button, Box, Typography } from "@mui/material";
 import { Google } from "@mui/icons-material";
 import ZTextField from "../../utils/ZTextField";
-import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../../../assets/LOGIN.png";
+import { useLoginMutation } from "../../Redux/features/Auth/authApi";
+import { toast } from "sonner";
+import { useDispatch } from "react-redux";
+import { setUser } from "../../Redux/features/Auth/authSlice";
 
 const Login = () => {
-  const { reset } = useForm();
+  const [login] = useLoginMutation();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    console.log(data);
-    reset();
+  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+    const toastId = toast.loading("Logging in");
+    try {
+      const res = await login(data);
+
+      if (!res?.data?.success) {
+        toast.error(res?.data?.message, { id: toastId });
+      } else {
+        toast.success("Logged in successfully", { id: toastId });
+        const responseData = res?.data?.data;
+        dispatch(setUser(responseData));
+        if (responseData?.user?.role === "admin") {
+          navigate("/admin/dashboard");
+        } else {
+          navigate("/all-products");
+        }
+      }
+    } catch (err) {
+      toast.error("Something went wrong", { id: toastId });
+      console.log(err);
+    }
   };
   return (
     <Box
@@ -34,7 +58,7 @@ const Login = () => {
 
             <Box className="space-y-[16px]">
               <Box className="space-y-[8px]">
-                <ZTextField name="username" label="Username" type="text" />
+                <ZTextField name="email" label="User Email" type="text" />
               </Box>
               <Box className="space-y-[8px]">
                 <ZTextField name="password" label="Password" type="text" />
@@ -115,8 +139,8 @@ const Login = () => {
               >
                 Hover on this for admin login
                 <Box className="tooltiptext ">
-                  <Box className="!my-[4px]"> Email : zayed@zayed.com </Box>
-                  <Box className="!my-[4px]">Pass: zayed234</Box>
+                  <Box className="!my-[4px]"> Email : Zayed@Iqbal.com </Box>
+                  <Box className="!my-[4px]">Pass: Tiberium18</Box>
                 </Box>
               </Button>
             </Box>

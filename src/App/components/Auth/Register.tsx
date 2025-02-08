@@ -4,14 +4,14 @@ import { Button, Box, Typography } from "@mui/material";
 
 import ZTextField from "../../utils/ZTextField";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../../../assets/LOGIN.png";
 import { useRegisterMutation } from "../../Redux/features/Auth/authApi";
 import { toast } from "sonner";
 
 const Register = () => {
-  const [register, { isLoading }] = useRegisterMutation();
-
+  const [register] = useRegisterMutation();
+  const navigate = useNavigate();
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const toastId = toast.loading("Creating a new account");
 
@@ -21,20 +21,21 @@ const Register = () => {
     formData.append("password", data.password);
     formData.append("address", data.address);
     formData.append("phone", data.phone);
-    console.log(data.profileImage);
-    if (!data.profileImage) {
-      return toast.error("Please upload a profile image", { id: toastId });
-    }
 
-    formData.append("profileImage", data.profileImage);
+    if (data.profileImage && data.profileImage instanceof File) {
+      formData.append("profileImage", data.profileImage);
+    } else {
+      return toast.error("Please upload a valid profile image");
+    }
+    console.log(Object.fromEntries(formData));
     try {
       const res = await register(formData);
       console.log(res);
       if (!res?.data?.success) {
         toast.error(res?.data?.message, { id: toastId });
-        console.log(res);
       } else {
         toast.success("Account created successfully", { id: toastId });
+        navigate("/login");
       }
     } catch (err) {
       toast.error("Something went wrong", { id: toastId });

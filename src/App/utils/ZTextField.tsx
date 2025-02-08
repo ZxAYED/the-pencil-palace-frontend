@@ -24,10 +24,12 @@ const ZTextField = ({
           type={type}
           variant="standard"
           fullWidth
-          value={value?.fileName}
-          onChange={(e) => {
+          value={type === "file" ? value?.fileName : value}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             if (type === "file") {
-              onChange(e.target.files?.[0]);
+              const file = e.target.files?.[0];
+
+              onChange(file);
             } else {
               onChange(e.target.value);
             }

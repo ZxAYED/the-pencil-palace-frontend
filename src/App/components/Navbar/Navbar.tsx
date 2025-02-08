@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import Badge, { badgeClasses } from "@mui/material/Badge";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCartOutlined";
+
 import {
   AppBar,
   Toolbar,
@@ -13,25 +12,26 @@ import {
   List,
   ListItem,
   ListItemText,
-  styled,
+  Avatar,
 } from "@mui/material";
 
 import logo from "../../../assets/logo.webp";
-import { Menu as MenuIcon, AccountCircle } from "@mui/icons-material";
-import { NavLink } from "react-router-dom";
+import { Menu as MenuIcon } from "@mui/icons-material";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import OrderModal from "../AllProducts/OrderModal";
+import { logout, selectCurrentUser } from "../../Redux/features/Auth/authSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "sonner";
+import { useEffect } from "react";
 
 function NavBar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
-  const [count, setCount] = useState<number>(0);
+  const user = useSelector(selectCurrentUser);
 
-  const CartBadge = styled(Badge)`
-    & .${badgeClasses.badge} {
-      top: -12px;
-      right: -6px;
-    }
-  `;
+  const navigate = useNavigate();
+
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
@@ -40,34 +40,103 @@ function NavBar() {
     setAnchorEl(event.currentTarget);
   };
 
+  const dispatch = useDispatch();
+
   const handleMenuClose = () => {
     setAnchorEl(null);
   };
 
   const menuItems = [
-    { name: "Home", path: "" },
+    { name: "Home", path: "/" },
     {
       name: "All Products",
-      path: "all-products",
+      path: "/all-products",
     },
     {
       name: "About",
-      path: "about",
+      path: "/about",
     },
   ];
 
   const drawer = (
     <Box
       onClick={handleDrawerToggle}
-      sx={{ textAlign: "center", color: "#424242", borderRadius: "20px" }}
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        color: "#424242",
+        borderRadius: "20px",
+      }}
     >
-      <img src={logo} alt="logo" className="w-[100%] h-[40dvh]" />
+      {user?.user ? (
+        <img
+          alt="Profile"
+          className="w-[100%] h-[40dvh]"
+          src={user.user.profileImage}
+        />
+      ) : (
+        <img src={logo} alt="logo" className="w-[100%] h-[40dvh]" />
+      )}
+
       <List>
         {menuItems.map((item) => (
           <ListItem key={item.name} button component={NavLink} to={item?.path}>
             <ListItemText primary={item.name} />
           </ListItem>
         ))}
+        <Box className="my-[8px]   !font-[500] ">
+          <OrderModal />
+        </Box>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "8px",
+            marginLeft: "16px",
+            alignItems: "flex-start",
+            justifySelf: "flex-start",
+            marginTop: "8px",
+          }}
+        >
+          {user?.user?.role === "admin" && (
+            <Button
+              sx={{
+                color: "#424242",
+                fontWeight: "400",
+                borderColor: "#424242",
+                fontSize: "16px",
+                width: "100%",
+                marginLeft: "-6px",
+                borderRadius: "8px",
+                letterSpacing: "0px",
+              }}
+              onClick={() => navigate("/admin/dashboard")}
+              className="Zbutton Ztype1 Zbtn-txt "
+            >
+              Dashboard
+            </Button>
+          )}
+
+          <Box
+            button
+            className="Zbutton Ztype1 Zbtn-txt"
+            sx={{
+              color: "#424242",
+              fontWeight: "400",
+              borderColor: "#424242",
+              fontSize: "16px",
+              width: "100%",
+              letterSpacing: "0px",
+              borderRadius: "8px",
+            }}
+            onClick={() => {
+              dispatch(logout());
+              toast.success("Logged out successfully");
+            }}
+          >
+            Logout
+          </Box>
+        </Box>
       </List>
     </Box>
   );
@@ -99,7 +168,10 @@ function NavBar() {
           sx={{
             maxWidth: "1280px",
             mx: "auto",
-            width: "100%",
+            width: {
+              xs: "80%",
+              md: "100%",
+            },
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
@@ -141,7 +213,10 @@ function NavBar() {
               flexGrow: 1,
               display: { xs: "none", md: "flex" },
               justifyContent: "center",
-              gap: "80px",
+              gap: {
+                md: "40px",
+                xl: "80px",
+              },
               alignItems: "center",
             }}
           >
@@ -153,62 +228,107 @@ function NavBar() {
                     color: "#424242",
                     fontWeight: "500",
                     borderColor: "#424242",
-                    fontSize: "18px",
+                    fontSize: "16px",
                   }}
                 >
                   {item.name}
                 </Button>
               </NavLink>
             ))}
-            <Box>
-              <IconButton>
-                <ShoppingCartIcon fontSize="medium" />
-                <CartBadge
-                  badgeContent={count}
-                  color="primary"
-                  overlap="circular"
-                />
-              </IconButton>
-            </Box>
+            <OrderModal />
           </Box>
+          <Box>
+            {user ? (
+              <Box>
+                <IconButton
+                  size="large"
+                  edge="end"
+                  color="inherit"
+                  onClick={handleProfileMenuOpen}
+                  sx={{
+                    display: { xs: "none", md: "flex" },
+                    justifyContent: "center",
+                    alignItems: "center",
+                    mx: "auto",
+                  }}
+                >
+                  {user?.user?.profileImage ? (
+                    <img
+                      alt="Profile"
+                      className="h-[50px] w-[50px] rounded-full"
+                      src={user.user.profileImage}
+                    />
+                  ) : (
+                    <Avatar />
+                  )}
+                </IconButton>
 
-          <IconButton
-            size="large"
-            edge="end"
-            color="inherit"
-            onClick={handleProfileMenuOpen}
-            sx={{
-              display: { xs: "none", md: "flex" },
-              justifyContent: "center",
-              alignItems: "center",
-              width: 54,
-              height: 54,
-              p: 1,
-              boxSizing: "border-box",
-              marginRight: {
-                md: "10px",
-                xl: "0px",
-              },
-            }}
-          >
-            <AccountCircle sx={{ fontSize: 40 }} />
-          </IconButton>
+                <Menu
+                  anchorEl={anchorEl}
+                  anchorOrigin={{ vertical: "top", horizontal: "right" }}
+                  keepMounted
+                  transformOrigin={{ vertical: "top", horizontal: "right" }}
+                  open={Boolean(anchorEl)}
+                  onClose={handleMenuClose}
+                  sx={{
+                    mt: ["50px"],
+                  }}
+                >
+                  {user?.user?.role === "admin" && (
+                    <Box className="flex flex-col gap-[8px] h-[50px] items-center p-[8px] justify-center">
+                      <Button
+                        sx={{
+                          color: "#424242",
+                          fontWeight: "500",
+                          borderColor: "#424242",
+                          fontSize: "16px",
+                          width: "100%",
+                          borderRadius: "8px",
+                        }}
+                        onClick={() => navigate("/admin/dashboard")}
+                        className="Zbutton Ztype1 Zbtn-txt "
+                      >
+                        Dashboard
+                      </Button>
+                    </Box>
+                  )}
 
-          <Menu
-            anchorEl={anchorEl}
-            anchorOrigin={{ vertical: "top", horizontal: "right" }}
-            keepMounted
-            transformOrigin={{ vertical: "top", horizontal: "right" }}
-            open={Boolean(anchorEl)}
-            onClose={handleMenuClose}
-            sx={{
-              borderRadius: "40%",
-              marginTop: "40px",
-            }}
-          >
-            <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-            <MenuItem onClick={handleMenuClose}>Logout</MenuItem>
-          </Menu>
+                  <Box className="flex flex-col gap-[8px]  items-center p-[8px] justify-center">
+                    <MenuItem
+                      button
+                      className="Zbutton Ztype1 Zbtn-txt"
+                      sx={{
+                        color: "#424242",
+                        fontWeight: "500",
+                        borderColor: "#424242",
+                        fontSize: "16px",
+                        width: "100%",
+                        borderRadius: "8px",
+                      }}
+                      onClick={() => {
+                        dispatch(logout());
+                        toast.success("Logged out successfully");
+                      }}
+                    >
+                      Logout
+                    </MenuItem>
+                  </Box>
+                </Menu>
+              </Box>
+            ) : (
+              <Button
+                type="button"
+                fullWidth
+                variant="contained"
+                className="bg-[#29b6f6] text-white p-[12px] rounded-sm font-semibold hover:bg-[#333333]"
+                onClick={() => {
+                  navigate("/login");
+                }}
+              >
+                Log In
+              </Button>
+            )}
+          </Box>
         </Toolbar>
       </AppBar>
 
