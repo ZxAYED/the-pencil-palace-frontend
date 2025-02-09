@@ -8,7 +8,7 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
-import * as React from "react";
+
 import Box from "@mui/material/Box";
 import { useState } from "react";
 
@@ -17,7 +17,6 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCartOutlined";
 import { styled } from "@mui/material/styles";
 import { IconButton } from "@mui/material";
 import { Fragment } from "react/jsx-runtime";
-import ShoppingCartOutlined from "@mui/icons-material/ShoppingCartOutlined";
 
 export default function OrderModal() {
   const [open, setOpen] = useState(false);

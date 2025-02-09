@@ -2,12 +2,12 @@
 import { TextField } from "@mui/material";
 import {
   Control,
-  useFormContext,
   Controller,
   FieldValues,
+  useFormContext,
 } from "react-hook-form";
 
-const ZTextField = ({
+const ZRatingFieldOptional = ({
   name,
   label,
   type,
@@ -16,9 +16,9 @@ const ZTextField = ({
 }: {
   name: string;
   label: string;
+  type: string;
   control?: Control<FieldValues, any>;
   placeholder?: string;
-  type: string;
 }) => {
   const { control: formControl } = useFormContext();
 
@@ -34,17 +34,18 @@ const ZTextField = ({
           type={type}
           variant="standard"
           fullWidth
-          required
-          placeholder={placeholder || ""}
-          value={type === "file" ? value?.fileName : value}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-            if (type === "file") {
-              const file = e.target.files?.[0];
+          placeholder={`${placeholder}  ⭐  `}
+          InputProps={{
+            inputProps: {
+              min: 0,
 
-              onChange(file);
-            } else {
-              onChange(e.target.value);
-            }
+              max: 5,
+              step: 0.1,
+            },
+          }}
+          value={value}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+            onChange(e.target.value);
           }}
         />
       )}
@@ -52,4 +53,4 @@ const ZTextField = ({
   );
 };
 
-export default ZTextField;
+export default ZRatingFieldOptional;

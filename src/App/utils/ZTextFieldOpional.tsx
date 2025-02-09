@@ -7,7 +7,7 @@ import {
   FieldValues,
 } from "react-hook-form";
 
-const ZTextField = ({
+const ZTextFieldOptional = ({
   name,
   label,
   type,
@@ -34,7 +34,6 @@ const ZTextField = ({
           type={type}
           variant="standard"
           fullWidth
-          required
           placeholder={placeholder || ""}
           value={type === "file" ? value?.fileName : value}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
@@ -52,4 +51,4 @@ const ZTextField = ({
   );
 };
 
-export default ZTextField;
+export default ZTextFieldOptional;

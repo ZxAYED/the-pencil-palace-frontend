@@ -10,8 +10,7 @@ import { Provider } from "react-redux";
 import { store } from "./App/Redux/store";
 const customTheme = createTheme({
   typography: {
-    fontFamily:
-      "'Poppins', 'Josefin Sans', 'Raleway', 'Source Code Pro', 'Anonymous Pro', sans-serif",
+    fontFamily: "Raleway",
     h1: { fontWeight: 700, fontSize: "3rem", lineHeight: 1.2 },
     h2: { fontWeight: 600, fontSize: "2.5rem", lineHeight: 1.3 },
     body1: { fontWeight: 400, fontSize: "1rem", lineHeight: 1.5 },
@@ -61,6 +60,7 @@ createRoot(document.getElementById("root")!).render(
                 color: "#424242",
               },
               className: "class",
+              position: "top-right",
             }}
           />
         </ThemeProvider>

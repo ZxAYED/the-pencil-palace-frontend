@@ -13,6 +13,7 @@ import {
   ListItem,
   ListItemText,
   Avatar,
+  Divider,
 } from "@mui/material";
 
 import logo from "../../../assets/logo.webp";
@@ -21,14 +22,14 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import OrderModal from "../AllProducts/OrderModal";
 import { logout, selectCurrentUser } from "../../Redux/features/Auth/authSlice";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { toast } from "sonner";
-import { useEffect } from "react";
+import { useAppSelector } from "../../Redux/hook";
 
 function NavBar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
-  const user = useSelector(selectCurrentUser);
+  const user = useAppSelector(selectCurrentUser);
 
   const navigate = useNavigate();
 
@@ -274,6 +275,24 @@ function NavBar() {
                     mt: ["50px"],
                   }}
                 >
+                  <Box className="mx-[10px] flex justify-between items-center gap-[16px] !mb-[16px]">
+                    <Box className="flex items-center  ">
+                      <img
+                        src={user?.user?.profileImage}
+                        alt="profile"
+                        className="w-[50px] h-[50px] rounded-full"
+                      />
+                    </Box>
+                    <Box>
+                      <Box className="text-[#424242] text-[14px] !font-[500]">
+                        {user?.user?.name}
+                      </Box>
+                      <Box className="text-[14px] text-[#424242] !py-[4px] !font-[500]">
+                        {user?.user?.email}
+                      </Box>
+                    </Box>
+                  </Box>
+                  <Divider />
                   {user?.user?.role === "admin" && (
                     <Box className="flex flex-col gap-[8px] h-[50px] items-center p-[8px] justify-center">
                       <Button
@@ -294,9 +313,9 @@ function NavBar() {
                   )}
 
                   <Box className="flex flex-col gap-[8px]  items-center p-[8px] justify-center">
-                    <MenuItem
+                    <Button
                       button
-                      className="Zbutton Ztype1 Zbtn-txt"
+                      className="Zbutton Ztype1 Zbtn-txt flex justify-center items-center "
                       sx={{
                         color: "#424242",
                         fontWeight: "500",
@@ -311,7 +330,7 @@ function NavBar() {
                       }}
                     >
                       Logout
-                    </MenuItem>
+                    </Button>
                   </Box>
                 </Menu>
               </Box>

@@ -9,7 +9,6 @@ body {
   padding: 0;
   background-color: #fff8e1;
   color: #424242;
-  font-family: "Poppins", "Raleway", "Source Code Pro", sans-serif;
   font-weight: 400;
 }
 
@@ -21,6 +20,7 @@ body {
   border-radius: 30px;
   color: #424242;
   font-weight: 800;
+  font-family: "Raleway";
   transition: all 0.5s ease-in-out;
 }
 
@@ -67,7 +67,9 @@ body {
   border-radius: 5px;
   font-size: 16px;
   cursor: pointer;
-  transition: background-color 0.3s, transform 0.2s ease-out;
+  transition:
+    background-color 0.3s,
+    transform 0.2s ease-out;
 }
 
 .tooltip button:hover {

@@ -140,7 +140,7 @@ const Login = () => {
                 Hover on this for admin login
                 <Box className="tooltiptext ">
                   <Box className="!my-[4px]"> Email : Zayed@Iqbal.com </Box>
-                  <Box className="!my-[4px]">Pass: Tiberium18</Box>
+                  <Box className="!my-[4px]">Pass: admin123</Box>
                 </Box>
               </Button>
             </Box>

@@ -74,23 +74,6 @@ const routes = createBrowserRouter([
           </PrivateRoute>
         ),
       },
-
-      {
-        path: "/admin/dashboard/delete-product",
-        element: (
-          <PrivateRoute>
-            <DeleteProduct />
-          </PrivateRoute>
-        ),
-      },
-      {
-        path: "/admin/dashboard/update-product",
-        element: (
-          <PrivateRoute>
-            <UpdateProduct />
-          </PrivateRoute>
-        ),
-      },
     ],
   },
   {
