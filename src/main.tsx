@@ -54,13 +54,13 @@ createRoot(document.getElementById("root")!).render(
           <CssBaseline />
           <RouterProvider router={routes} />
           <Toaster
+            position="top-right"
             toastOptions={{
               style: {
                 background: "#fff8e1",
                 color: "#424242",
               },
               className: "class",
-              position: "top-right",
             }}
           />
         </ThemeProvider>

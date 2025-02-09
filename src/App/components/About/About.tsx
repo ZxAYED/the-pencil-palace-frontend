@@ -24,49 +24,51 @@ const AboutUs = () => {
           }}
           className="py-[24px] px-[16px]  rounded-[10px] max-w-[1280px] mx-auto "
         >
-          <motion.div
-            initial={{ opacity: 0, x: -100 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <Typography
-              variant="h3"
-              sx={{ letterSpacing: "5px", color: "#424242" }}
+          <Box className="flex justify-between flex-col rounded-[10px] p-[24px] shadow-[0_0_10px_rgba(0,0,0,0.4)]">
+            <motion.div
+              initial={{ opacity: 0, x: -100 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
             >
-              About Us
-            </Typography>
-          </motion.div>
+              <Typography
+                variant="h3"
+                sx={{ letterSpacing: "5px", color: "#424242" }}
+              >
+                About Us
+              </Typography>
+            </motion.div>
 
-          <motion.div
-            className="!mt-[16px]      "
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8 }}
-          >
-            <Typography
-              variant="h5"
-              className="text-[#424242] text-[16px] sm:text-[20px] font-[400] mb:text-[24px]"
+            <motion.div
+              className="!mt-[16px]      "
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.8 }}
             >
-              Welcome to Pencil Palace! Your one-stop shop for all things
-              stationery. We provide high-quality stationery products that are
-              perfect for students, professionals, and artists alike.
-            </Typography>
-            <Typography
-              sx={{
-                color: "#424242",
-                fontSize: {
-                  xs: "16px",
-                  sm: "18px",
-                },
-                fontWeight: "500",
-              }}
-              className="  !my-[24px]"
-            >
-              Our mission is to inspire creativity and productivity through the
-              best tools. We strive to bring you unique and innovative products
-              that meet your everyday needs.
-            </Typography>
-          </motion.div>
+              <Typography
+                variant="h5"
+                className="text-[#424242] text-[16px] sm:text-[20px] font-[400] mb:text-[24px]"
+              >
+                Welcome to Pencil Palace! Your one-stop shop for all things
+                stationery. We provide high-quality stationery products that are
+                perfect for students, professionals, and artists alike.
+              </Typography>
+              <Typography
+                sx={{
+                  color: "#424242",
+                  fontSize: {
+                    xs: "16px",
+                    sm: "18px",
+                  },
+                  fontWeight: "500",
+                }}
+                className="  !my-[24px]"
+              >
+                Our mission is to inspire creativity and productivity through
+                the best tools. We strive to bring you unique and innovative
+                products that meet your everyday needs.
+              </Typography>
+            </motion.div>
+          </Box>
           <Box
             className="px-[24px] rounded-[10px] shadow-[0_0_10px_rgba(0,0,0,0.2)]"
             sx={{

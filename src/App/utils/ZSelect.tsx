@@ -31,6 +31,7 @@ const ZSelect = ({
             {...field}
             labelId={`${name}`}
             id={name}
+            key={name}
             value={value || ""}
             onChange={(e) => onChange(e.target.value)}
             label={label}

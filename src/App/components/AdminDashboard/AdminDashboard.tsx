@@ -13,7 +13,6 @@ function AdminDashboard() {
 
   return (
     <Box className="flex h-screen bg-gray-100">
-      {/* Sidebar */}
       <Drawer
         open={sidebarOpen}
         onClose={() => setSidebarOpen(false)}
@@ -46,14 +45,11 @@ function AdminDashboard() {
             <ListItem button>
               <ListItemText primary="Reports" />
             </ListItem>
-            {/* Add more items here as needed */}
           </List>
         </Box>
       </Drawer>
 
-      {/* Main content */}
       <Box className="flex-1 p-[16px] sm:ml-[256px]">
-        {/* Navbar */}
         <Box className="w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700 p-[12px]">
           <Typography
             variant="h6"
@@ -62,8 +58,7 @@ function AdminDashboard() {
             Admin Dashboard
           </Typography>
         </Box>
-
-        {/* Content */}
+        s
         <Box className="pt-[5px]">
           <Typography className="text-[18px] text-gray-800 font-semibold">
             Welcome to the Admin Panel! Here you can manage all the features.

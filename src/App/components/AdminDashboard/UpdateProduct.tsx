@@ -13,10 +13,16 @@ import ZTextFieldOptional from "../../utils/ZTextFieldOpional";
 import ZButton from "../../utils/ZButton";
 import ZRatingFieldOptional from "../../utils/ZRatingFieldOptional";
 
-const UpdateProduct = ({ product }: { product: any }) => {
+const UpdateProduct = ({
+  product,
+  refetch,
+}: {
+  product: any;
+  refetch: () => void;
+}) => {
   const [open, setOpen] = useState(false);
-  const [updateProduct, { isLoading, refetch }] = useUpdateProductMutation();
-  const { handleSubmit, control, reset } = useForm();
+  const [updateProduct, { isLoading }] = useUpdateProductMutation();
+  const { handleSubmit, control } = useForm();
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -61,7 +67,9 @@ const UpdateProduct = ({ product }: { product: any }) => {
   };
 
   return isLoading ? (
-    <LoadingAnimation />
+    <Box className="grid place-items-center h-screen">
+      <LoadingAnimation />
+    </Box>
   ) : (
     <Box
       sx={{
@@ -70,7 +78,7 @@ const UpdateProduct = ({ product }: { product: any }) => {
         alignItems: "center",
       }}
     >
-      <Box onClick={handleClickOpen}>Update</Box>
+      <Box onClick={handleClickOpen}>Mod</Box>
       <Fragment>
         <Drawer anchor="right" open={open} onClose={handleClose}>
           <Box
@@ -128,15 +136,18 @@ const UpdateProduct = ({ product }: { product: any }) => {
                     alt={product?.name}
                     className="w-[100px] h-[100px] rounded-[6px]"
                   />
-                  <Box>
+                  <Box className="border-[2px] rounded-[6px] p-[12px]  ">
                     <Typography className=" !mb-[8px] text-[#424242] ">
-                      Product Id: {product._id}
+                      <span className="font-[700]">Product Id:</span>
+                      {product._id}
                     </Typography>
                     <Typography className=" !mb-[8px] text-[#424242] ">
-                      Product : {product.name}
+                      <span className="font-[700]">Product :</span>
+                      {product.name}
                     </Typography>
                     <Typography className="text-[#424242] ">
-                      Category : {product.category}
+                      <span className="font-[700]">Category :</span>
+                      {product.category}
                     </Typography>
                   </Box>
                 </Box>

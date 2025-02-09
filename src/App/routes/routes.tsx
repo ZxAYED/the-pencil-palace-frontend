@@ -10,8 +10,8 @@ import PrivateRoute from "../components/Private/PrivateRoutes";
 import CreateProduct from "../components/AdminDashboard/CreateProduct";
 import AdminLayout from "../components/Layout/AdminLayout";
 import GetAllProducts from "../components/AdminDashboard/GetAllProducts";
-import DeleteProduct from "../components/AdminDashboard/DeleteProduct";
-import UpdateProduct from "../components/AdminDashboard/UpdateProduct";
+
+import UserManagement from "../components/AdminDashboard/UserManagement";
 
 const routes = createBrowserRouter([
   {
@@ -71,6 +71,14 @@ const routes = createBrowserRouter([
         element: (
           <PrivateRoute>
             <GetAllProducts />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/admin/dashboard/users",
+        element: (
+          <PrivateRoute>
+            <UserManagement />
           </PrivateRoute>
         ),
       },

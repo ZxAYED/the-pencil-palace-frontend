@@ -1,24 +1,74 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { useGetProductsQuery } from "../../Redux/features/products/productsApi";
+import {
+  useDeleteProductMutation,
+  useGetProductsQuery,
+} from "../../Redux/features/products/productsApi";
 
 import LoadingAnimation from "../../utils/LoadingAnimation";
 import ListAltTwoToneIcon from "@mui/icons-material/ListAltTwoTone";
 
 import { motion } from "framer-motion";
 import UpdateProduct from "./UpdateProduct";
+import { toast } from "sonner";
 
 const GetAllProducts = () => {
-  const { data, isFetching, isLoading } = useGetProductsQuery(undefined, {
-    refetchOnMountOrArgChange: true,
-    refetchOnFocus: true,
-    refetchOnReconnect: true,
-  });
+  const { data, isFetching, isLoading, refetch } = useGetProductsQuery(
+    undefined,
+    {
+      refetchOnMountOrArgChange: true,
+      refetchOnFocus: true,
+      refetchOnReconnect: true,
+    }
+  );
+  const [deleteProduct, { isLoading: isDeleting }] = useDeleteProductMutation();
 
   const products = data?.data || <LoadingAnimation />;
+
+  const handleDelete = async (productId: string) => {
+    toast(
+      (t) => (
+        <div>
+          <p>Are you sure you want to delete this product?</p>
+          <div className="flex gap-4 mt-[10px]">
+            <button
+              onClick={async () => {
+                toast.dismiss(t);
+
+                try {
+                  const res = await deleteProduct({ id: productId });
+
+                  if (res.error) {
+                    toast.error("Failed to delete product");
+                  } else {
+                    toast.success("Product deleted successfully");
+                    refetch();
+                  }
+                } catch (error) {
+                  toast.error("Failed to delete product");
+                  console.error(error);
+                }
+              }}
+              className="bg-green-500 hover:bg-green-700 text-white px-[12px] py-[5px] rounded-md"
+            >
+              Yes
+            </button>
+            <button
+              onClick={() => toast.dismiss(t)}
+              className="bg-red-500 hover:bg-red-700 text-white px-[12px] py-[5px] rounded-md"
+            >
+              No
+            </button>
+          </div>
+        </div>
+      ),
+      { duration: 5000 }
+    );
+  };
+
   return (
     <>
-      {isLoading || isFetching ? (
+      {isLoading || isFetching || isDeleting ? (
         <div className="grid place-items-center h-screen">
           <LoadingAnimation />
         </div>
@@ -70,7 +120,7 @@ const GetAllProducts = () => {
                   <tr key={product._id} className="">
                     <td className="px-[24px] py-[16px]">
                       <img
-                        src={product.profileImage || "default-image.jpg"}
+                        src={product.profileImage}
                         alt={product.name}
                         className="w-[80px] h-[80px] object-cover"
                       />
@@ -86,7 +136,7 @@ const GetAllProducts = () => {
                       {product.category}
                     </td>
                     <td className="px-[24px] py-[16px] text-[#424242] hover:text-[#2979FF] hover:duration-600 font-[600]">
-                      BDT {product.price}
+                      {product.price} BDT
                     </td>
                     <td className="px-[24px] py-[16px] text-[#424242] hover:text-[#2979FF] hover:duration-600 font-[500]">
                       {product.quantity}
@@ -94,11 +144,11 @@ const GetAllProducts = () => {
                     <td className="px-[24px] py-[16px] text-[#424242] hover:text-[#2979FF] hover:duration-600 font-[500] ">
                       {product.inStock ? (
                         <span className="bg-[#9DEEB3] px-[10px] py-[6px] rounded-[5px] font-[700]">
-                          Yes
+                          In Stock
                         </span>
                       ) : (
-                        <span className="bg-[#FDCFD2] px-[10px] py-[5px] rounded-md font-[700]">
-                          No
+                        <span className="bg-[#FDCFD2] px-[10px] py-[6px] rounded-[5px] font-[700]">
+                          Out of Stock
                         </span>
                       )}
                     </td>
@@ -116,11 +166,19 @@ const GetAllProducts = () => {
                         whileTap={{ scale: 0.95 }}
                         className="Zbutton Ztype1 Zbtn-txt !px-[16px] !py-[12px] font-raleway "
                       >
-                        <UpdateProduct product={product} />
+                        <UpdateProduct refetch={refetch} product={product} />
                       </motion.button>
 
-                      <button className="Zbutton Ztype1 Zbtn-txt !px-[16px] !ml-[16px] !py-[12px] font-raleway cursor-pointer">
-                        Delete
+                      <button
+                        onClick={() => handleDelete(product._id)}
+                        disabled={isDeleting}
+                        className={`Zbutton Ztype1 Zbtn-txt !px-[16px] !ml-[16px] !py-[12px] font-raleway ${
+                          isDeleting
+                            ? "cursor-not-allowed opacity-50"
+                            : "cursor-pointer"
+                        }`}
+                      >
+                        {isDeleting ? "Deleting..." : "Del"}
                       </button>
                     </td>
                   </tr>

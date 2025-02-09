@@ -4,7 +4,7 @@ import NoteAddIcon from "@mui/icons-material/NoteAdd";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { AppProvider, Navigation } from "@toolpad/core/AppProvider";
-
+import GroupAddTwoToneIcon from "@mui/icons-material/GroupAddTwoTone";
 import { Outlet } from "react-router-dom";
 import {
   Box,
@@ -20,7 +20,16 @@ import { Home } from "@mui/icons-material";
 
 const NAVIGATION: Navigation = [
   { kind: "header", title: "Main items" },
-  { segment: "admin/dashboard", title: "Dashboard", icon: <DashboardIcon /> },
+  {
+    segment: "admin/dashboard",
+    title: "Dashboard",
+    icon: <DashboardIcon />,
+  },
+  {
+    segment: "admin/dashboard/users",
+    title: "User Management",
+    icon: <GroupAddTwoToneIcon />,
+  },
   {
     segment: "admin/dashboard/create-product",
     title: "Create A Product",
@@ -36,7 +45,12 @@ const NAVIGATION: Navigation = [
     title: "Orders",
     icon: <ShoppingCartIcon />,
   },
-  { segment: "", title: "Home", icon: <Home /> },
+
+  {
+    segment: "",
+    title: "Home",
+    icon: <Home />,
+  },
 ];
 
 export default function AdminLayout() {
@@ -125,7 +139,7 @@ export default function AdminLayout() {
         }}
         navigation={NAVIGATION}
       >
-        <DashboardLayout sidebarExpandedWidth={200}>
+        <DashboardLayout sidebarExpandedWidth={220}>
           <Box
             sx={{ fontFamily: "Raleway" }}
             className="bg-[#FFF8E1] text-[#424242] container max-w-[95%]  mx-auto "
