@@ -1,19 +1,17 @@
 import { FieldValues, SubmitHandler } from "react-hook-form";
 import ZForm from "../../utils/ZForm";
 import { Button, Box, Typography } from "@mui/material";
-import { Google } from "@mui/icons-material";
 import ZTextField from "../../utils/ZTextField";
-
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../../../assets/LOGIN.png";
 import { useLoginMutation } from "../../Redux/features/Auth/authApi";
 import { toast } from "sonner";
-import { useDispatch } from "react-redux";
 import { setUser } from "../../Redux/features/Auth/authSlice";
+import { useAppDispatch } from "../../Redux/hook";
 
 const Login = () => {
   const [login] = useLoginMutation();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
@@ -72,36 +70,9 @@ const Login = () => {
                 type="submit"
                 fullWidth
                 variant="contained"
-                className="bg-[#29b6f6] text-white p-[12px] rounded-sm text-[14px] font-[600] hover:bg-[#333333]"
+                className="bg-[#29b6f6] text-white p-[12px] rounded-sm text-[14px] !font-[600] hover:bg-[#333333]"
               >
                 Sign in
-              </Button>
-            </Box>
-
-            <Box className="flex items-center py-[16px] space-x-[8px]">
-              <Box className="flex-1 h-[1px] bg-[#e0e0e0]"></Box>
-              <Typography
-                sx={{
-                  fontSize: {
-                    xs: "11px",
-                    sm: "14px",
-                  },
-                }}
-                className="text-[14px]"
-              >
-                Login with social accounts
-              </Typography>
-              <Box className="flex-1 h-[1px] bg-[#e0e0e0]"></Box>
-            </Box>
-
-            <Box className="flex justify-center space-x-[16px]">
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                className="bg-[#29b6f6] text-white p-[16px] rounded-sm text-[14px] font-[600] hover:bg-[#333333] flex items-center justify-center gap-[8px]"
-              >
-                <Google className="text-[#29b6f6]" /> Google Sign In
               </Button>
             </Box>
 
@@ -116,6 +87,7 @@ const Login = () => {
             >
               Don&apos;t have an account ?
               <Link to="/register" className="underline text-[#29b6f6]">
+                {"   "}
                 Sign up
               </Link>
             </Typography>

@@ -12,6 +12,8 @@ import AdminLayout from "../components/Layout/AdminLayout";
 import GetAllProducts from "../components/AdminDashboard/GetAllProducts";
 
 import UserManagement from "../components/AdminDashboard/UserManagement";
+import ProductInfo from "../components/AllProducts/ProductInfo";
+import PaymentPage from "../components/Payment/PaymentPage";
 
 const routes = createBrowserRouter([
   {
@@ -30,6 +32,10 @@ const routes = createBrowserRouter([
       {
         path: "/all-products",
         element: <AllProducts />,
+      },
+      {
+        path: "/product/:id",
+        element: <ProductInfo />,
       },
     ],
   },
@@ -87,6 +93,10 @@ const routes = createBrowserRouter([
   {
     path: "/login",
     element: <Login />,
+  },
+  {
+    path: "/payment",
+    element: <PaymentPage />,
   },
   {
     path: "/register",

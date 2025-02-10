@@ -30,6 +30,20 @@ body {
   letter-spacing: 3px;
 }
 
+a:hover {
+  text-decoration: none !important;
+  color: inherit !important;
+}
+
+a {
+  text-decoration: none !important;
+  color: "#424242" !important;
+}
+
+a:hover {
+  color: inherit !important;
+}
+
 .Ztype1::after {
   content: "";
   position: absolute;

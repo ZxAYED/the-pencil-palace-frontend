@@ -12,9 +12,10 @@ const AboutUs = () => {
       sx={{
         backgroundImage: `url(${bg})`,
         backgroundSize: "contain",
+        backgroundPosition: "center",
       }}
     >
-      <Box className="backdrop-blur-[20px]">
+      <Box className="">
         <Box
           sx={{
             mx: {
@@ -24,7 +25,7 @@ const AboutUs = () => {
           }}
           className="py-[24px] px-[16px]  rounded-[10px] max-w-[1280px] mx-auto "
         >
-          <Box className="flex justify-between flex-col rounded-[10px] p-[24px] shadow-[0_0_10px_rgba(0,0,0,0.4)]">
+          <Box className="flex justify-between flex-col rounded-[10px] p-[24px] backdrop-blur-[20px] shadow-[0_0_10px_rgba(0,0,0,0.4)]">
             <motion.div
               initial={{ opacity: 0, x: -100 }}
               animate={{ opacity: 1, x: 0 }}
@@ -70,7 +71,7 @@ const AboutUs = () => {
             </motion.div>
           </Box>
           <Box
-            className="px-[24px] rounded-[10px] shadow-[0_0_10px_rgba(0,0,0,0.2)]"
+            className="px-[24px] rounded-[10px] shadow-[0_0_10px_rgba(0,0,0,0.2)] backdrop-blur-[20px]"
             sx={{
               display: "flex",
               flexDirection: {
@@ -364,9 +365,19 @@ const AboutUs = () => {
             </Box>
           </Box>
 
-          <Box className="flex  md:flex-row sm:flex-col justify-between items-center">
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              borderRadius: "8px",
+              p: "24px",
+              mb: "48px",
+            }}
+            className="rounded-[8px] backdrop-blur-[20px]"
+          >
             <motion.div
-              className="!mt-[32px] backdrop-blur-"
+              className="!mt-[32px] "
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 1 }}

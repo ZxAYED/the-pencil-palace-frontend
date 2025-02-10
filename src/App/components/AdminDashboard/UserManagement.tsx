@@ -5,7 +5,10 @@ import LoadingAnimation from "../../utils/LoadingAnimation";
 import ListAltTwoToneIcon from "@mui/icons-material/ListAltTwoTone";
 import { motion } from "framer-motion";
 import { toast } from "sonner";
-import { useAllUsersQuery } from "../../Redux/features/Auth/authApi";
+import {
+  useAllUsersQuery,
+  useDeleteUserMutation,
+} from "../../Redux/features/Auth/authApi";
 import UpdateUser from "./UpdateUser";
 
 const UserManagement = () => {
@@ -14,22 +17,28 @@ const UserManagement = () => {
     refetchOnFocus: true,
     refetchOnReconnect: true,
   });
-  const [deleteProduct, { isLoading: isDeleting }] = useDeleteProductMutation();
+  const [deleteUser, { isLoading: isDeleting }] = useDeleteUserMutation();
 
   const users = data?.data || [];
 
-  const handleDelete = async (userId: string) => {
+  const handleDelete = async (user: any) => {
     toast(
       (t) => (
         <div>
-          <p>Are you sure you want to delete this user?</p>
-          <div className="flex gap-4 mt-[10px]">
+          <p>
+            Are you sure you want to {user.isDeleted ? "restore" : "delete"}
+            this user?
+          </p>
+          <div className="flex gap-[16px] mt-[10px]">
             <button
               onClick={async () => {
                 toast.dismiss(t);
 
                 try {
-                  const res = await deleteProduct({ id: userId });
+                  const res = await deleteUser({
+                    id: user._id,
+                    payload: { isDeleted: !user.isDeleted },
+                  });
 
                   if (res.error) {
                     toast.error("Failed to delete user");
@@ -166,7 +175,7 @@ const UserManagement = () => {
                       </motion.button>
 
                       <motion.button
-                        onClick={() => handleDelete(user._id)}
+                        onClick={() => handleDelete(user)}
                         whileTap={{ scale: 0.95 }}
                         disabled={isDeleting}
                         className={`Zbutton Ztype1 Zbtn-txt !px-[16px] !ml-[16px] !py-[12px] font-raleway  max-w-[120px] ${

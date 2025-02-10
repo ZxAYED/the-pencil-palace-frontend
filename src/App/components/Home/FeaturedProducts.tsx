@@ -1,7 +1,18 @@
-import { Box, Typography } from "@mui/material";
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Card from "../../utils/Card";
+import { useGetProductsQuery } from "../../Redux/features/products/productsApi";
+import { Box, Typography } from "@mui/material";
+import LoadingAnimation from "../../utils/LoadingAnimation";
 
 const FeaturedProducts = () => {
+  const {
+    data: products,
+    isLoading,
+    isFetching,
+  } = useGetProductsQuery(undefined, {
+    refetchOnMountOrArgChange: true,
+    refetchOnFocus: true,
+  });
   return (
     <Box className="max-w-[1280px] mx-auto">
       <Typography
@@ -29,9 +40,13 @@ const FeaturedProducts = () => {
         }}
         className=" "
       >
-        <Card />
-        <Card />
-        <Card />
+        {isLoading || isFetching ? (
+          <LoadingAnimation />
+        ) : (
+          products?.data.map((product: any) => (
+            <Card key={product._id} product={product} />
+          ))
+        )}
       </Box>
     </Box>
   );

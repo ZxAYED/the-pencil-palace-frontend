@@ -1,48 +1,85 @@
-import { Box } from "@mui/material";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { Box, Typography } from "@mui/material";
+import { Rating, Star } from "@smastrom/react-rating";
+import "@smastrom/react-rating/style.css";
+import { Link } from "react-router-dom";
 
-const Card = () => {
+const Card = ({ product }: any) => {
+  const customStarStyles = {
+    itemShapes: Star,
+    activeFillColor: "#FFD700",
+    inactiveFillColor: "#D3D3D3",
+  };
+
   return (
-    <Box
-      sx={{
-        width: {
-          xs: "360px",
-          lg: "420px",
-        },
-      }}
-      className="flex flex-col  gap-4 h-[500px] w-[420px] border-2 border-[#2e2e2e] Zcard  rounded-[8px] !box-border"
-    >
-      <div className="bg-white w-[384px] shadow-xl rounded-[16px] overflow-hidden  p-[20px] space-y-[16px] Ztitle">
-        <figure className="relative">
+    <Link to={`/product/${product._id}`}>
+      <Box
+        sx={{
+          width: { xs: 390, md: 420 },
+          color: "#424242",
+        }}
+        className="flex flex-col w-full items-center  h-[500px]  space-y-[16px] border-[1px] border-[#2e2e2e] Zcard  rounded-[8px] !box-border "
+      >
+        <Box className="mx-auto mt-[48px]  w-[300px] h-[200px] ">
           <img
-            src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-            alt="Shoes"
-            className="w-[100%] h-[224px] object-cover Zimage"
+            src={product?.profileImage}
+            alt={product?.name}
+            className="!w-[300px] !mx-auto !h-[200px] object-cover rounded-[6px] "
           />
-        </figure>
-        <div className="p-[20px] space-y-[16px] Ztitle">
-          <h2 className="text-[24px] font-[700] flex items-center Ztitle">
-            Shoes!
-            <span className="bg-[#29b6f6] text-white ml-[12px] px-[8px] py-[4px] text-[12px] rounded-[8px] Ztitle">
-              NEW
+        </Box>
+
+        <div className="">
+          <h1 className="!text-[24px] !flex justify-between !items-center !gap-[4px]  !font-[700] !ml-[10px]   ">
+            {product.name}
+
+            <span className="text-[10px] font-[500] ">
+              {product.inStock ? (
+                <span className="bg-[#9DEEB3] px-[10px] py-[6px] rounded-[5px] font-[700]  no-underline">
+                  In Stock
+                </span>
+              ) : (
+                <span className="bg-[#FDCFD2] px-[10px] py-[6px] rounded-[5px] font-[700]  no-underline">
+                  Out of Stock
+                </span>
+              )}
             </span>
-          </h2>
-          <p className="text-[14px] text-[#757575] Ztitle">
-            If a dog chews shoes whose shoes does he choose?
-          </p>
-          <div className="flex justify-end space-x-[8px] pt-[12px]">
+          </h1>
+
+          <Box className="flex justify-between mx-auto">
+            <Typography className="text-[12px] font-[500] px-[12px] py-[4px] flex justify-center items-center gap-[4px]">
+              <span className="text-[16px] !font-[600]  ">Rating :</span>
+              <Rating
+                value={product?.rating}
+                readOnly
+                itemStyles={customStarStyles}
+                style={{ maxWidth: 130 }}
+              />
+            </Typography>
+
+            <h1 className="text-[16px] font-[600] ">
+              Price :
+              <span className="line-through text-[12px]">
+                {product?.price + 200}/=
+              </span>
+              {product?.price}
+            </h1>
+          </Box>
+          <div className="flex justify-end mt-[10px] gap-[12px]">
             <span className="text-[12px] font-[500] px-[12px] py-[4px] border border-[#cccccc] rounded-[50px]">
-              Fashion
+              {product?.category}
             </span>
+
             <span className="text-[12px] font-[500] px-[12px] py-[4px] border border-[#cccccc] rounded-[50px]">
-              Products
+              {product?.brand}
             </span>
+
             <span className="text-[12px] font-[500] px-[12px] py-[4px] border border-[#cccccc] rounded-[50px] Zprice">
-              price 200
+              quantity : {product?.quantity}
             </span>
           </div>
         </div>
-      </div>
-    </Box>
+      </Box>
+    </Link>
   );
 };
 

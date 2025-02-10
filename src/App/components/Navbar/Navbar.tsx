@@ -7,7 +7,6 @@ import {
   Box,
   Button,
   Menu,
-  MenuItem,
   Drawer,
   List,
   ListItem,
@@ -20,19 +19,25 @@ import logo from "../../../assets/logo.webp";
 import { Menu as MenuIcon } from "@mui/icons-material";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import OrderModal from "../AllProducts/OrderModal";
+import OrderModal from "../Orders/OrderModal";
 import { logout, selectCurrentUser } from "../../Redux/features/Auth/authSlice";
-import { useDispatch } from "react-redux";
+
 import { toast } from "sonner";
-import { useAppSelector } from "../../Redux/hook";
+import { useAppDispatch, useAppSelector } from "../../Redux/hook";
 
 function NavBar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const user = useAppSelector(selectCurrentUser);
+  const dispatch = useAppDispatch();
 
   const navigate = useNavigate();
 
+  const handleLogout = () => {
+    dispatch(logout());
+
+    toast.success("Logged out successfully");
+  };
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
@@ -40,8 +45,6 @@ function NavBar() {
   const handleProfileMenuOpen = (event: any) => {
     setAnchorEl(event.currentTarget);
   };
-
-  const dispatch = useDispatch();
 
   const handleMenuClose = () => {
     setAnchorEl(null);
@@ -130,10 +133,7 @@ function NavBar() {
               letterSpacing: "0px",
               borderRadius: "8px",
             }}
-            onClick={() => {
-              dispatch(logout());
-              toast.success("Logged out successfully");
-            }}
+            onClick={handleLogout}
           >
             Logout
           </Box>
@@ -324,10 +324,7 @@ function NavBar() {
                         width: "100%",
                         borderRadius: "8px",
                       }}
-                      onClick={() => {
-                        dispatch(logout());
-                        toast.success("Logged out successfully");
-                      }}
+                      onClick={handleLogout}
                     >
                       Logout
                     </Button>
@@ -335,17 +332,15 @@ function NavBar() {
                 </Menu>
               </Box>
             ) : (
-              <Button
+              <button
                 type="button"
-                fullWidth
-                variant="contained"
-                className="bg-[#29b6f6] text-white p-[12px] rounded-sm font-semibold hover:bg-[#333333]"
+                className="Zbutton Ztype1 Zbtn-txt !px-[12px] !py-[12px] !rounded-[4px]  !font-[600] !letter-spacing-[4px] text-[14px] "
                 onClick={() => {
                   navigate("/login");
                 }}
               >
-                Log In
-              </Button>
+                LOGIN
+              </button>
             )}
           </Box>
         </Toolbar>
@@ -362,7 +357,11 @@ function NavBar() {
           sx={{
             display: { xs: "block", md: "none" },
             "& .MuiDrawer-paper": {
-              width: 240,
+              width: {
+                xs: "300px",
+                sm: "350px",
+                md: "400px",
+              },
             },
           }}
         >

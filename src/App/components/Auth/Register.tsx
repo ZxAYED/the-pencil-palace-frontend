@@ -104,6 +104,7 @@ const Register = () => {
             >
               Already have an account ?
               <Link to="/login" className="underline text-[#29b6f6]">
+                {" "}
                 Login
               </Link>
             </Typography>

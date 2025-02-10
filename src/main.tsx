@@ -8,19 +8,45 @@ import { ParallaxProvider } from "react-scroll-parallax";
 import { Toaster } from "sonner";
 import { Provider } from "react-redux";
 import { store } from "./App/Redux/store";
+
 const customTheme = createTheme({
+  palette: {
+    primary: {
+      main: "#29B6F6",
+    },
+    secondary: {
+      main: "#424242",
+    },
+    background: {
+      default: "#FFF8E1",
+      paper: "#FFF8E1",
+    },
+    text: {
+      primary: "#424242",
+      secondary: "#757575",
+    },
+    action: {
+      hover: "#29B6F6",
+    },
+  },
   typography: {
-    fontFamily: "Raleway",
-    h1: { fontWeight: 700, fontSize: "3rem", lineHeight: 1.2 },
-    h2: { fontWeight: 600, fontSize: "2.5rem", lineHeight: 1.3 },
-    body1: { fontWeight: 400, fontSize: "1rem", lineHeight: 1.5 },
-    button: { fontWeight: 500, textTransform: "none" },
+    fontFamily: "Raleway,  sans-serif",
   },
   components: {
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          color: "#FFFFFF",
+        },
+      },
+    },
     MuiInputBase: {
       styleOverrides: {
         input: {
-          color: "#fff8e1",
+          color: "#FFF8E1",
+
+          padding: "8px 12px",
+          borderRadius: "4px",
         },
       },
     },
@@ -29,6 +55,9 @@ const customTheme = createTheme({
         underline: {
           "&:after": {
             borderBottomColor: "#29B6F6",
+          },
+          "&:before": {
+            borderBottomColor: "#757575",
           },
         },
       },
@@ -43,8 +72,31 @@ const customTheme = createTheme({
         },
       },
     },
+    MuiCard: {
+      styleOverrides: {
+        root: {
+          backgroundColor: "#FFF8E1",
+          borderRadius: "16px",
+          padding: "16px",
+          boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)",
+        },
+      },
+    },
+    MuiCssBaseline: {
+      styleOverrides: {
+        body: {
+          backgroundColor: "#FFF8E1",
+          color: "#424242",
+        },
+        a: {
+          textDecoration: "none",
+          color: "inherit",
+        },
+      },
+    },
   },
 });
+export default customTheme;
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
