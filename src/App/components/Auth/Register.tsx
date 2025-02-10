@@ -12,12 +12,13 @@ import { toast } from "sonner";
 const Register = () => {
   const [register] = useRegisterMutation();
   const navigate = useNavigate();
+
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const toastId = toast.loading("Creating a new account");
 
     const formData = new FormData();
     formData.append("name", data.name);
-    formData.append("email", data.email);
+    formData.append("email", data.email.toLowerCase());
     formData.append("password", data.password);
     formData.append("address", data.address);
     formData.append("phone", data.phone);
@@ -27,10 +28,10 @@ const Register = () => {
     } else {
       return toast.error("Please upload a valid profile image");
     }
-    console.log(Object.fromEntries(formData));
+
     try {
       const res = await register(formData);
-      console.log(res);
+
       if (!res?.data?.success) {
         toast.error(res?.data?.message, { id: toastId });
       } else {
@@ -52,7 +53,7 @@ const Register = () => {
     >
       <ZForm onSubmit={onSubmit}>
         <Box className="w-full max-w-[600px] p-[32px] space-y-[24px] rounded-xl  text-[#fff8e1] mx-auto h-[100vh] flex flex-col justify-center">
-          <Box className="border-[1px] drop-shadow-[0_0_30px_rgba(0,0,0,0.1)  ] backdrop-blur-[15px] border-[#424242] rounded-[12px] p-[80px]">
+          <Box className="border-[1px] drop-shadow-[0_0_30px_rgba(0,0,0,0.1)] backdrop-blur-[15px] border-[#424242] rounded-[12px] p-[80px]">
             <Typography
               className="text-[24px] !font-[700] text-center !mb-[72px]"
               variant="h4"

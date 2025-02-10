@@ -8,6 +8,7 @@ import { useLoginMutation } from "../../Redux/features/Auth/authApi";
 import { toast } from "sonner";
 import { setUser } from "../../Redux/features/Auth/authSlice";
 import { useAppDispatch } from "../../Redux/hook";
+import ResetPasswordRequestModal from "./ResetPass";
 
 const Login = () => {
   const [login] = useLoginMutation();
@@ -46,7 +47,7 @@ const Login = () => {
     >
       <ZForm onSubmit={onSubmit}>
         <Box className="w-full max-w-[600px] p-[32px] space-y-[24px] rounded-xl  text-[#fff8e1] mx-auto h-[100vh] flex flex-col justify-center">
-          <Box className="border-[1px] drop-shadow-[0_0_30px_rgba(0,0,0,0.1)  ] backdrop-blur-[15px] border-[#424242] rounded-[12px] p-[80px] ">
+          <Box className="border-[1px] drop-shadow-[0_0_30px_rgba(0,0,0,0.1)] backdrop-blur-[15px] border-[#424242] rounded-[12px] p-[80px] ">
             <Typography
               className="text-[24px] !font-[700] text-center !mb-[72px]"
               variant="h4"
@@ -60,10 +61,9 @@ const Login = () => {
               </Box>
               <Box className="space-y-[8px]">
                 <ZTextField name="password" label="Password" type="text" />
-                <Box className="flex justify-end text-[12px] mt-[4px]">
-                  <a href="#" className="text-[#29b6f6] underline">
-                    Forgot Password?
-                  </a>
+                <Box className="flex justify-between text-[12px] mt-[16px] underline text-[#29b6f6] cursor-pointer   ">
+                  <Link to="/change-password"> Change password ? </Link>
+                  <ResetPasswordRequestModal></ResetPasswordRequestModal>
                 </Box>
               </Box>
               <Button

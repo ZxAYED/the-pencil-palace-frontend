@@ -14,6 +14,8 @@ import GetAllProducts from "../components/AdminDashboard/GetAllProducts";
 import UserManagement from "../components/AdminDashboard/UserManagement";
 import ProductInfo from "../components/AllProducts/ProductInfo";
 import PaymentPage from "../components/Payment/PaymentPage";
+import ResetPassword from "../components/Auth/ResetPassword";
+import ChangePassword from "../components/Auth/ChangePassword";
 
 const routes = createBrowserRouter([
   {
@@ -89,6 +91,14 @@ const routes = createBrowserRouter([
         ),
       },
     ],
+  },
+  {
+    path: "/reset-password",
+    element: <ResetPassword />,
+  },
+  {
+    path: "/change-password",
+    element: <ChangePassword />,
   },
   {
     path: "/login",
