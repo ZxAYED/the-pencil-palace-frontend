@@ -30,55 +30,41 @@ const customTheme = createTheme({
     },
   },
   typography: {
-    fontFamily: "Raleway,  sans-serif",
+    fontFamily: "Raleway, sans-serif",
   },
   components: {
     MuiButton: {
       styleOverrides: {
         root: {
           color: "#FFFFFF",
+          fontFamily: "Raleway, sans-serif",
         },
       },
     },
     MuiInputBase: {
       styleOverrides: {
         input: {
-          color: "#FFF8E1",
-
+          color: "#424242",
+          fontFamily: "Raleway, sans-serif",
           padding: "8px 12px",
           borderRadius: "4px",
         },
       },
     },
-    MuiInput: {
+    MuiSelect: {
       styleOverrides: {
-        underline: {
-          "&:after": {
-            borderBottomColor: "#29B6F6",
-          },
-          "&:before": {
-            borderBottomColor: "#757575",
-          },
+        root: {
+          fontFamily: "Raleway, sans-serif",
+        },
+        icon: {
+          color: "#424242",
         },
       },
     },
-    MuiFormLabel: {
+    MuiMenuItem: {
       styleOverrides: {
         root: {
-          color: "#29B6F6",
-          "&.Mui-focused": {
-            color: "#29B6F6",
-          },
-        },
-      },
-    },
-    MuiCard: {
-      styleOverrides: {
-        root: {
-          backgroundColor: "#FFF8E1",
-          borderRadius: "16px",
-          padding: "16px",
-          boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)",
+          fontFamily: "Raleway, sans-serif",
         },
       },
     },
@@ -96,6 +82,7 @@ const customTheme = createTheme({
     },
   },
 });
+
 export default customTheme;
 
 createRoot(document.getElementById("root")!).render(

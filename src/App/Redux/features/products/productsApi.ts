@@ -1,13 +1,31 @@
 import baseApi from "../../Api/baseApi";
 
+interface filterParams {
+    name: string;
+    value: string;
+}
+
 const productsApi = baseApi.injectEndpoints({
     endpoints: (builder) => ({
         getProducts: builder.query({
-            query: () => ({
-                url: "/products",
-                method: "GET",
-                credentials: "include"
-            }),
+            query: (args) => {
+
+
+                const params = new URLSearchParams();
+                if (args) {
+                    args.forEach((i: filterParams) => {
+                        params.append(i.name, i.value)
+                        console.log(Object.fromEntries(params));
+
+                    })
+                }
+                return {
+                    url: "/products",
+                    method: "GET",
+                    credentials: "include",
+                    params: params,
+                }
+            },
             providesTags: ["Product"],
         }),
 

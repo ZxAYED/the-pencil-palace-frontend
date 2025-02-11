@@ -9,8 +9,16 @@ import { useCreateProductMutation } from "../../Redux/features/products/products
 import { toast } from "sonner";
 import LoadingAnimation from "./../../utils/LoadingAnimation";
 import ZSelect from "../../utils/ZSelect";
+
 const CreateProduct = () => {
   const [createProduct, { isLoading }] = useCreateProductMutation();
+  const categories = [
+    { value: "Office Supplies", label: "Office Supplies" },
+    { value: "Art Supplies", label: "Art Supplies" },
+    { value: "Technology", label: "Technology" },
+    { value: "Educational", label: "Educational" },
+    { value: "Writing", label: "Writing" },
+  ];
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const toastId = toast.loading("Creating product");
@@ -89,17 +97,7 @@ const CreateProduct = () => {
             <ZTextField label="Product Name" name="name" type="text" />
 
             <ZTextField label="Price" name="price" type="number" />
-            <ZSelect
-              label="Category"
-              name="category"
-              options={[
-                { value: "Office Supplies", label: "Office Supplies" },
-                { value: "Art Supplies", label: "Art Supplies" },
-                { value: "Technology", label: "Technology" },
-                { value: "Educational", label: "Educational" },
-                { value: "Writing", label: "Writing" },
-              ]}
-            />
+            <ZSelect label="Category" name="category" options={categories} />
             <ZTextField label="Description" name="description" type="text" />
             <ZTextField label="Features" name="features" type="text" />
             <ZTextField label="Quantity" name="quantity" type="number" />

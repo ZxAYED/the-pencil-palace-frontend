@@ -4,13 +4,18 @@ import Card from "../../utils/Card";
 import { useState } from "react";
 import FilterSection from "./FilterSection";
 import { useGetProductsQuery } from "../../Redux/features/products/productsApi";
+import LoadingAnimation from "../../utils/LoadingAnimation";
 
 const AllProducts = () => {
   const [page, setPage] = useState(1);
-  const { data: products, isLoading } = useGetProductsQuery(undefined, {
+  const [args, setArgs] = useState(null);
+
+  const { data: products, isLoading } = useGetProductsQuery(args, {
     refetchOnMountOrArgChange: true,
     refetchOnFocus: true,
   });
+  console.log(args);
+  console.log(products);
   const handleChange = (event: number, value: number) => {
     setPage(value);
     console.log(value);
@@ -80,37 +85,60 @@ const AllProducts = () => {
                 md: "auto",
                 lg: "0px",
               },
-              border: "2px solid #424242",
-              borderRadius: "10px",
               padding: "10px",
               marginTop: "24px",
             }}
           >
-            <FilterSection />
+            <FilterSection setArgs={setArgs} />
           </Box>
         </Box>
 
-        <Box
-          sx={{
-            mt: 3,
-            display: "grid",
-            gridTemplateColumns: {
-              xs: "repeat(1, 1fr)",
-              sm: "repeat(2, 1fr)",
-            },
-            gap: 2,
-            mx: "auto",
-            placeItems: "center",
-          }}
-        >
-          {products?.data.map((product: any) => (
-            <Card
-              className="space-y-[32px]"
-              key={product._id}
-              product={product}
-            ></Card>
-          ))}
-        </Box>
+        {isLoading ? (
+          <Box
+            sx={{
+              mt: 3,
+              display: "grid",
+
+              placeItems: "center",
+            }}
+          >
+            <LoadingAnimation></LoadingAnimation>
+          </Box>
+        ) : (
+          <Box
+            sx={{
+              mt: 3,
+              display: "grid",
+              gridTemplateColumns: {
+                xs: "repeat(1, 1fr)",
+                sm: "repeat(2, 1fr)",
+              },
+              gap: 2,
+              mx: "auto",
+              placeItems: "center",
+            }}
+          >
+            {products?.data?.length > 0 ? (
+              products?.data?.map((product: any) => (
+                <Card
+                  className="space-y-[32px]"
+                  key={product._id}
+                  product={product}
+                ></Card>
+              ))
+            ) : (
+              <Box sx={{ display: "grid", placeItems: "center" }}>
+                <Typography
+                  textAlign="center"
+                  sx={{ textAlign: "center" }}
+                  variant="h3"
+                >
+                  No products found
+                </Typography>
+              </Box>
+            )}
+          </Box>
+        )}
       </Box>
 
       <Box sx={{ display: "flex", justifyContent: "center", mt: 3 }}>

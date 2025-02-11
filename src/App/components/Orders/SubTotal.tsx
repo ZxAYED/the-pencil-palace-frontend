@@ -57,11 +57,17 @@ const SubTotal = ({ cartData }: SubTotalProps) => {
           alignItems: "center",
         }}
       >
-        <Link to="/payment">
-          <button className="Zbutton Ztype1 Zbtn-txt uppercase font-[14px] fon-[700] w-fit !px-[24px] !py-[12px] !rounded-[6px]">
-            Proceed to Payment
-          </button>
-        </Link>
+        {calculateSubTotal() > 0 ? (
+          <Link to="/payment">
+            <button className="Zbutton Ztype1 Zbtn-txt uppercase font-[14px] fon-[700] w-fit !px-[24px] !py-[12px] !rounded-[6px]">
+              Proceed to Payment
+            </button>
+          </Link>
+        ) : (
+          <Typography className=" uppercase !font-raleway !text-[20px] !font-[700] w-fit !px-[24px] !py-[12px] !rounded-[6px]">
+            Add Items to Cart First !
+          </Typography>
+        )}
       </Box>
     </Box>
   );
