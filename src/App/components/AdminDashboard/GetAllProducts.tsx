@@ -5,12 +5,12 @@ import {
   useGetProductsQuery,
 } from "../../Redux/features/products/productsApi";
 
-import LoadingAnimation from "../../utils/LoadingAnimation";
 import ListAltTwoToneIcon from "@mui/icons-material/ListAltTwoTone";
+import LoadingAnimation from "../../utils/LoadingAnimation";
 
 import { motion } from "framer-motion";
-import UpdateProduct from "./UpdateProduct";
 import { toast } from "sonner";
+import UpdateProduct from "./UpdateProduct";
 
 const GetAllProducts = () => {
   const { data, isFetching, isLoading, refetch } = useGetProductsQuery(
@@ -21,6 +21,7 @@ const GetAllProducts = () => {
       refetchOnReconnect: true,
     }
   );
+
   const [deleteProduct, { isLoading: isDeleting }] = useDeleteProductMutation();
 
   const products = data?.data || <LoadingAnimation />;

@@ -1,20 +1,40 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Box, Typography } from "@mui/material";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { selectCurrentUser } from "../../Redux/features/Auth/authSlice";
+import { useCreateOrderMutation } from "../../Redux/features/orders/orderApi";
+import { useAppSelector } from "../../Redux/hook";
 
-interface CartItem {
-  total: number;
-}
+const SubTotal = ({ cartData }: { cartData: any }) => {
+  const user = useAppSelector(selectCurrentUser);
+  const navigate = useNavigate();
+  const [createOrder, { isLoading }] = useCreateOrderMutation();
 
-interface SubTotalProps {
-  cartData: CartItem[];
-}
-
-const SubTotal = ({ cartData }: SubTotalProps) => {
+  const Data = cartData || [];
   const calculateSubTotal = () => {
-    if (!cartData || cartData.length === 0) return 0;
-    return cartData.reduce((acc, item) => acc + item.total, 0);
+    return Data.reduce((acc: any, item: any) => acc + item?.totalPrice, 0);
   };
+  const quantity = Data?.reduce(
+    (acc: any, item: any) => acc + item?.products?.quantity,
+    0
+  );
 
+  const handleMakePayment = async () => {
+    const payload = {
+      userEmail: user?.user?.email,
+      quantity,
+      totalPrice: calculateSubTotal(),
+    };
+    try {
+      const res = await createOrder(payload);
+      console.log(res);
+      if (res.data.success) {
+        navigate(`/payment/${res.data.data._id}`);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
   return (
     <Box
       sx={{
@@ -58,11 +78,12 @@ const SubTotal = ({ cartData }: SubTotalProps) => {
         }}
       >
         {calculateSubTotal() > 0 ? (
-          <Link to="/payment">
-            <button className="Zbutton Ztype1 Zbtn-txt uppercase font-[14px] fon-[700] w-fit !px-[24px] !py-[12px] !rounded-[6px]">
-              Proceed to Payment
-            </button>
-          </Link>
+          <button
+            onClick={handleMakePayment}
+            className="Zbutton Ztype1 Zbtn-txt uppercase font-[14px] fon-[700] w-fit !px-[24px] !py-[12px] !rounded-[6px]"
+          >
+            {isLoading ? "Processing..." : "Proceed to Payment"}
+          </button>
         ) : (
           <Typography className=" uppercase !font-raleway !text-[20px] !font-[700] w-fit !px-[24px] !py-[12px] !rounded-[6px]">
             Add Items to Cart First !

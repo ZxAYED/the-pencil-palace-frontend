@@ -2,25 +2,25 @@
 
 import {
   AppBar,
-  Toolbar,
-  IconButton,
+  Avatar,
   Box,
   Button,
-  Menu,
+  Divider,
   Drawer,
+  IconButton,
   List,
   ListItem,
   ListItemText,
-  Avatar,
-  Divider,
+  Menu,
+  Toolbar,
 } from "@mui/material";
 
-import logo from "../../../assets/logo.webp";
 import { Menu as MenuIcon } from "@mui/icons-material";
-import { NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import OrderModal from "../Orders/OrderModal";
+import { NavLink, useNavigate } from "react-router-dom";
+import logo from "../../../assets/logo.webp";
 import { logout, selectCurrentUser } from "../../Redux/features/Auth/authSlice";
+import OrderModal from "../Orders/OrderModal";
 
 import { toast } from "sonner";
 import { useAppDispatch, useAppSelector } from "../../Redux/hook";
@@ -102,7 +102,7 @@ function NavBar() {
             marginTop: "8px",
           }}
         >
-          {user?.user?.role === "admin" && (
+          {user?.user?.role && (
             <Button
               sx={{
                 color: "#424242",
@@ -114,7 +114,7 @@ function NavBar() {
                 borderRadius: "8px",
                 letterSpacing: "0px",
               }}
-              onClick={() => navigate("/admin/dashboard")}
+              onClick={() => navigate(`/${user?.user?.role}/dashboard`)}
               className="Zbutton Ztype1 Zbtn-txt "
             >
               Dashboard
@@ -293,7 +293,7 @@ function NavBar() {
                     </Box>
                   </Box>
                   <Divider />
-                  {user?.user?.role === "admin" && (
+                  {user?.user?.role && (
                     <Box className="flex flex-col gap-[8px] h-[50px] items-center p-[8px] justify-center">
                       <Button
                         sx={{
@@ -304,7 +304,9 @@ function NavBar() {
                           width: "100%",
                           borderRadius: "8px",
                         }}
-                        onClick={() => navigate("/admin/dashboard")}
+                        onClick={() =>
+                          navigate(`/${user?.user?.role}/dashboard`)
+                        }
                         className="Zbutton Ztype1 Zbtn-txt "
                       >
                         Dashboard

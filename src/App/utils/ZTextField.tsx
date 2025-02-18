@@ -2,9 +2,9 @@
 import { TextField } from "@mui/material";
 import {
   Control,
-  useFormContext,
   Controller,
   FieldValues,
+  useFormContext,
 } from "react-hook-form";
 
 const ZTextField = ({
@@ -35,6 +35,7 @@ const ZTextField = ({
           variant="standard"
           fullWidth
           required
+          sx={{ my: 1 }}
           placeholder={placeholder || ""}
           value={type === "file" ? value?.fileName : value}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {

@@ -1,18 +1,17 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import Drawer from "@mui/material/Drawer";
-import Divider from "@mui/material/Divider";
 import Box from "@mui/material/Box";
-import { useState, Fragment, useEffect } from "react";
+import Drawer from "@mui/material/Drawer";
+import { Fragment, useEffect, useState } from "react";
 
-import Badge, { badgeClasses } from "@mui/material/Badge";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCartOutlined";
-import { styled } from "@mui/material/styles";
 import { IconButton, Typography } from "@mui/material";
-import OrderCard from "./OrderCard";
+import Badge, { badgeClasses } from "@mui/material/Badge";
+import { styled } from "@mui/material/styles";
+import { selectCurrentUser } from "../../Redux/features/Auth/authSlice";
 import { useGetCartItemsQuery } from "../../Redux/features/orders/orderApi";
 import { useAppSelector } from "../../Redux/hook";
-import { selectCurrentUser } from "../../Redux/features/Auth/authSlice";
 import LoadingAnimation from "../../utils/LoadingAnimation";
+import OrderCard from "./OrderCard";
 import SubTotal from "./SubTotal";
 
 export default function OrderModal() {
@@ -101,7 +100,7 @@ export default function OrderModal() {
                     sm: "550px",
                     md: "700px",
                   },
-                  mt: "40px",
+                  mt: "16px",
                   flexDirection: "column",
                   gap: "10px",
                   justifyContent: "center",
@@ -113,7 +112,6 @@ export default function OrderModal() {
                   data?.data?.map((item: any) => (
                     <Box key={item._id}>
                       <OrderCard item={item} refetch={refetch} />
-                      <Divider sx={{ width: "90%", my: "24px", mx: "auto" }} />
                     </Box>
                   ))
                 ) : (
@@ -131,7 +129,6 @@ export default function OrderModal() {
                 )}
               </Box>
             </Box>
-            <Divider></Divider>
             <Box
               sx={{
                 position: "sticky",

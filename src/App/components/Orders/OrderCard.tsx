@@ -2,8 +2,8 @@
 import { Box, Typography } from "@mui/material";
 import { Rating, Star } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
-import { useRemoveFromCartMutation } from "../../Redux/features/products/productsApi";
 import { toast } from "sonner";
+import { useRemoveFromCartMutation } from "../../Redux/features/orders/orderApi";
 
 const OrderCard = ({ item, refetch }: any) => {
   const customStarStyles = {
@@ -11,12 +11,13 @@ const OrderCard = ({ item, refetch }: any) => {
     activeFillColor: "#FFD700",
     inactiveFillColor: "#D3D3D3",
   };
+
   const [removeFromCart, { isLoading }] = useRemoveFromCartMutation();
 
-  const handleDelete = async () => {
+  const handleDelete = async (id: string) => {
     try {
-      const res = await removeFromCart(item._id);
-      console.log(res);
+      const res = await removeFromCart(id);
+
       refetch();
       if (!res.data.success) {
         toast.error(res.data.message);
@@ -25,6 +26,7 @@ const OrderCard = ({ item, refetch }: any) => {
       console.log(error);
     }
   };
+
   return (
     <Box
       sx={{
@@ -33,8 +35,12 @@ const OrderCard = ({ item, refetch }: any) => {
           xs: "column",
           sm: "row",
         },
-        width: "100%",
-        maxWidth: "100%",
+        width: {
+          xs: "300px",
+          sm: "550px",
+          md: "700px",
+        },
+
         backgroundColor: "#FFF3E0",
         borderTopRightRadius: "24px",
         borderBottomLeftRadius: "24px",
@@ -47,10 +53,10 @@ const OrderCard = ({ item, refetch }: any) => {
         sx={{
           width: {
             xs: "100%",
-            sm: "40%",
+            sm: "35%",
           },
           height: "200px",
-          background: `url(${item.productId.profileImage}) center/cover no-repeat`,
+          background: `url(${item?.products?.product?.profileImage}) center/cover no-repeat`,
         }}
       />
 
@@ -58,7 +64,7 @@ const OrderCard = ({ item, refetch }: any) => {
         sx={{
           width: {
             xs: "100%",
-            sm: "60%",
+            sm: "100%",
           },
           padding: "16px",
         }}
@@ -74,7 +80,7 @@ const OrderCard = ({ item, refetch }: any) => {
             },
           }}
         >
-          {item.productId.name}
+          {item?.products?.product?.name}
         </Typography>
 
         <Typography
@@ -88,9 +94,9 @@ const OrderCard = ({ item, refetch }: any) => {
             },
           }}
         >
-          Category: {item.productId.category}
+          Category: {item?.products?.product?.category}
         </Typography>
-
+        {/* 
         <Typography
           sx={{
             display: {
@@ -99,12 +105,11 @@ const OrderCard = ({ item, refetch }: any) => {
             },
             fontSize: "14px",
             marginTop: "8px",
-            lineHeight: "1.5",
             color: "#757575",
           }}
         >
           {item.productId.description}
-        </Typography>
+        </Typography> */}
 
         <Box
           sx={{
@@ -129,7 +134,7 @@ const OrderCard = ({ item, refetch }: any) => {
               },
             }}
           >
-            ${item?.productId?.price}
+            ${item?.products?.product?.price}
           </Typography>
 
           <Typography
@@ -143,11 +148,11 @@ const OrderCard = ({ item, refetch }: any) => {
               },
             }}
           >
-            Quantity: {item?.quantity}
+            Quantity: {item?.products?.quantity}
           </Typography>
 
           <Rating
-            value={item?.productId?.rating}
+            value={item?.products?.product?.rating}
             readOnly
             itemStyles={customStarStyles}
             style={{ maxWidth: 130 }}
@@ -156,8 +161,8 @@ const OrderCard = ({ item, refetch }: any) => {
 
         <Box sx={{ marginTop: "16px" }}>
           <button
-            onClick={handleDelete}
-            className="Zbutton Ztype1 Zbtn-txt uppercase font-[14px] fon-[700] w-full !px-[24px] !py-[12px] !rounded-[6px]"
+            onClick={() => handleDelete(item?._id)}
+            className="Zbutton Ztype1 Zbtn-txt uppercase font-[14px] fon-[700] z-0 w-full !px-[24px] !py-[12px] !rounded-[6px]"
           >
             {isLoading ? "Removing" : " Remove from cart"}
           </button>

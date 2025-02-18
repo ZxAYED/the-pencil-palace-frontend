@@ -1,18 +1,18 @@
 /* eslint-disable prefer-const */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useState } from "react";
 import {
   Box,
-  Typography,
-  FormControl,
-  Select,
-  MenuItem,
-  InputLabel,
   Chip,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
   Stack,
   TextField,
+  Typography,
 } from "@mui/material";
-import { SubmitHandler, FieldValues, useForm } from "react-hook-form";
+import { useState } from "react";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import ZButton from "../../utils/ZButton";
 
 import ZForm from "./../../utils/ZForm";
@@ -112,7 +112,7 @@ const SearchAndSortFields = ({ setArgs }: { setArgs: (args: any) => void }) => {
         </FormControl>
 
         <Typography variant="h6" className="!mt-[16px]">
-          Sort Order
+          Sort By Price
         </Typography>
         <FormControl fullWidth>
           <InputLabel>Sort Order</InputLabel>

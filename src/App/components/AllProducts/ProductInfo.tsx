@@ -1,18 +1,16 @@
-import { Box, Typography, Button, Divider } from "@mui/material";
-import { Link, Navigate, useParams } from "react-router-dom";
-import {
-  useAddToCartMutation,
-  useGetProductByIdQuery,
-} from "../../Redux/features/products/productsApi";
-import LoadingAnimation from "../../utils/LoadingAnimation";
+import { FavoriteBorder, LocalShipping, Verified } from "@mui/icons-material";
+import { Box, Button, Divider, Typography } from "@mui/material";
 import { Rating, Star } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
-import { LocalShipping, FavoriteBorder, Verified } from "@mui/icons-material";
-import { useAppSelector } from "../../Redux/hook";
-import { selectCurrentUser } from "../../Redux/features/Auth/authSlice";
-import { toast } from "sonner";
-import QuantitySelector from "./QuantitySelector";
 import { useState } from "react";
+import { Link, Navigate, useParams } from "react-router-dom";
+import { toast } from "sonner";
+import { selectCurrentUser } from "../../Redux/features/Auth/authSlice";
+import { useAddToCartMutation } from "../../Redux/features/orders/orderApi";
+import { useGetProductByIdQuery } from "../../Redux/features/products/productsApi";
+import { useAppSelector } from "../../Redux/hook";
+import LoadingAnimation from "../../utils/LoadingAnimation";
+import QuantitySelector from "./QuantitySelector";
 
 const ProductInfo = () => {
   const { id } = useParams();
@@ -39,17 +37,21 @@ const ProductInfo = () => {
     const toastId = toast.loading("Adding to Cart...");
 
     const cartData: {
-      productId: string;
-      userEmail: string;
-      quantity: number;
-      total: number;
+      products: {
+        product: string;
+        quantity: number;
+      };
       userId: string;
+      email: string;
+      totalPrice: number;
     } = {
-      productId: data?.data?._id,
-      userEmail: user?.user?.email,
+      products: {
+        product: data?.data?._id,
+        quantity: quantity,
+      },
       userId: user?.user?._id,
-      quantity: quantity,
-      total: data?.data?.price * quantity,
+      email: user?.user?.email,
+      totalPrice: data?.data?.price * quantity,
     };
 
     try {

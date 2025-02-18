@@ -1,21 +1,23 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "../../App";
-import Home from "../components/Home/Home";
 import About from "../components/About/About";
-import Register from "../components/Auth/Register";
-import Login from "../components/Auth/Login";
-import AllProducts from "../components/AllProducts/AllProducts";
 import AdminDashboard from "../components/AdminDashboard/AdminDashboard";
-import PrivateRoute from "../components/Private/PrivateRoutes";
 import CreateProduct from "../components/AdminDashboard/CreateProduct";
-import AdminLayout from "../components/Layout/AdminLayout";
 import GetAllProducts from "../components/AdminDashboard/GetAllProducts";
+import AllProducts from "../components/AllProducts/AllProducts";
+import Login from "../components/Auth/Login";
+import Register from "../components/Auth/Register";
+import Home from "../components/Home/Home";
+import AdminLayout from "../components/Layout/AdminLayout";
+import PrivateRoute from "../components/Private/PrivateRoutes";
 
 import UserManagement from "../components/AdminDashboard/UserManagement";
 import ProductInfo from "../components/AllProducts/ProductInfo";
-import PaymentPage from "../components/Payment/PaymentPage";
-import ResetPassword from "../components/Auth/ResetPassword";
 import ChangePassword from "../components/Auth/ChangePassword";
+import ResetPassword from "../components/Auth/ResetPassword";
+
+import PaymentPage from "../components/CheckoutPage/PaymentPage";
+import UserDashboard from "../components/UserDashboard/UserDashboard";
 
 const routes = createBrowserRouter([
   {
@@ -93,6 +95,24 @@ const routes = createBrowserRouter([
     ],
   },
   {
+    path: "/user/dashboard",
+    element: (
+      <PrivateRoute>
+        <AdminLayout />
+      </PrivateRoute>
+    ),
+    children: [
+      {
+        path: "/user/dashboard",
+        element: (
+          <PrivateRoute>
+            <UserDashboard></UserDashboard>
+          </PrivateRoute>
+        ),
+      },
+    ],
+  },
+  {
     path: "/reset-password",
     element: <ResetPassword />,
   },
@@ -105,7 +125,7 @@ const routes = createBrowserRouter([
     element: <Login />,
   },
   {
-    path: "/payment",
+    path: "/payment/:orderId",
     element: <PaymentPage />,
   },
   {

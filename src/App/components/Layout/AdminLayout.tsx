@@ -1,25 +1,24 @@
-import { DashboardLayout } from "@toolpad/core";
+import { Home } from "@mui/icons-material";
+import DashboardIcon from "@mui/icons-material/Dashboard";
+import GroupAddTwoToneIcon from "@mui/icons-material/GroupAddTwoTone";
 import ManageSearchIcon from "@mui/icons-material/ManageSearch";
 import NoteAddIcon from "@mui/icons-material/NoteAdd";
-import DashboardIcon from "@mui/icons-material/Dashboard";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import { AppProvider, Navigation } from "@toolpad/core/AppProvider";
-import GroupAddTwoToneIcon from "@mui/icons-material/GroupAddTwoTone";
-import { Outlet } from "react-router-dom";
 import {
   Box,
-  createTheme,
   CssBaseline,
   extendTheme,
-  ThemeProvider,
   GlobalStyles,
+  ThemeProvider,
 } from "@mui/material";
-import { useAppDispatch, useAppSelector } from "../../Redux/hook";
-import { logout, selectCurrentUser } from "../../Redux/features/Auth/authSlice";
-import { Home } from "@mui/icons-material";
+import { DashboardLayout } from "@toolpad/core";
+import { AppProvider, Navigation } from "@toolpad/core/AppProvider";
+import { Outlet } from "react-router-dom";
 import customTheme from "../../../main";
+import { logout, selectCurrentUser } from "../../Redux/features/Auth/authSlice";
+import { useAppDispatch, useAppSelector } from "../../Redux/hook";
 
-const NAVIGATION: Navigation = [
+const AdminNAVIGATION: Navigation = [
   { kind: "header", title: "Main items" },
   {
     segment: "admin/dashboard",
@@ -47,6 +46,19 @@ const NAVIGATION: Navigation = [
     icon: <ShoppingCartIcon />,
   },
 
+  {
+    segment: "",
+    title: "Home",
+    icon: <Home />,
+  },
+];
+const UserNAVIGATION: Navigation = [
+  { kind: "header", title: "Main items" },
+  {
+    segment: "user/dashboard",
+    title: "Dashboard",
+    icon: <DashboardIcon />,
+  },
   {
     segment: "",
     title: "Home",
@@ -95,11 +107,13 @@ export default function AdminLayout() {
         }}
         theme={demoTheme}
         branding={{
-          title: "Admin Dashboard",
+          title: `${user?.user?.role === "admin" ? "Admin" : "User"} Dashboard`,
           logo: "",
-          homeUrl: "/admin/dashboard",
+          homeUrl: `${user?.user?.role}/dashboard`,
         }}
-        navigation={NAVIGATION}
+        navigation={
+          user?.user?.role === "admin" ? AdminNAVIGATION : UserNAVIGATION
+        }
       >
         <DashboardLayout sidebarExpandedWidth={220}>
           <Box

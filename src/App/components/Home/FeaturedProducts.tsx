@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import Card from "../../utils/Card";
-import { useGetProductsQuery } from "../../Redux/features/products/productsApi";
 import { Box, Typography } from "@mui/material";
+import { useGetProductsQuery } from "../../Redux/features/products/productsApi";
+import Card from "../../utils/Card";
 import LoadingAnimation from "../../utils/LoadingAnimation";
 
 const FeaturedProducts = () => {
@@ -43,7 +43,7 @@ const FeaturedProducts = () => {
         {isLoading || isFetching ? (
           <LoadingAnimation />
         ) : (
-          products?.data.map((product: any) => (
+          products?.data?.isFeatured?.map((product: any) => (
             <Card key={product._id} product={product} />
           ))
         )}
