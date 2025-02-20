@@ -9,8 +9,6 @@ const productsApi = baseApi.injectEndpoints({
     endpoints: (builder) => ({
         getProducts: builder.query({
             query: (args) => {
-
-
                 const params = new URLSearchParams();
                 if (args) {
                     args.forEach((i: filterParams) => {
@@ -22,8 +20,17 @@ const productsApi = baseApi.injectEndpoints({
                 return {
                     url: "/products",
                     method: "GET",
-                    credentials: "include",
+
                     params: params,
+                }
+            },
+            providesTags: ["Product"],
+        }),
+        getProductsForAdmin: builder.query({
+            query: () => {
+                return {
+                    url: "/products/admin",
+                    method: "GET",
                 }
             },
             providesTags: ["Product"],
@@ -71,4 +78,4 @@ const productsApi = baseApi.injectEndpoints({
 
 });
 
-export const { useGetProductsQuery, useCreateProductMutation, useUpdateProductMutation, useDeleteProductMutation, useGetProductByIdQuery } = productsApi;
+export const { useGetProductsQuery, useCreateProductMutation, useUpdateProductMutation, useDeleteProductMutation, useGetProductByIdQuery, useGetProductsForAdminQuery } = productsApi;

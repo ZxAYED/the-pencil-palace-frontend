@@ -2,7 +2,7 @@
 
 import {
   useDeleteProductMutation,
-  useGetProductsQuery,
+  useGetProductsForAdminQuery,
 } from "../../Redux/features/products/productsApi";
 
 import ListAltTwoToneIcon from "@mui/icons-material/ListAltTwoTone";
@@ -13,7 +13,7 @@ import { toast } from "sonner";
 import UpdateProduct from "./UpdateProduct";
 
 const GetAllProducts = () => {
-  const { data, isFetching, isLoading, refetch } = useGetProductsQuery(
+  const { data, isFetching, isLoading, refetch } = useGetProductsForAdminQuery(
     undefined,
     {
       refetchOnMountOrArgChange: true,
@@ -23,7 +23,7 @@ const GetAllProducts = () => {
   );
 
   const [deleteProduct, { isLoading: isDeleting }] = useDeleteProductMutation();
-
+  console.log(data);
   const products = data?.data || <LoadingAnimation />;
 
   const handleDelete = async (productId: string) => {

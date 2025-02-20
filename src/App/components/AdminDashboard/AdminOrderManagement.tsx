@@ -1,35 +1,18 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { toast } from "sonner";
-import { selectCurrentUser } from "../../Redux/features/Auth/authSlice";
-import {
-  useGetOrderOfUserQuery,
-  useRemoveOrderMutation,
-} from "../../Redux/features/orders/orderApi";
-import { useAppSelector } from "../../Redux/hook";
+import { useGetOrdersQuery } from "../../Redux/features/orders/orderApi";
 import LoadingAnimation from "../../utils/LoadingAnimation";
-import ZButton from "../../utils/ZButton";
 
-const UserOrderManagement = () => {
-  const user = useAppSelector(selectCurrentUser);
-  const [removeOrder] = useRemoveOrderMutation();
-  const { data, isLoading, isFetching, refetch } = useGetOrderOfUserQuery(
-    user?.user?.email,
-    {
-      refetchOnMountOrArgChange: true,
-    }
-  );
-  const handleDelete = async (id: string) => {
-    const res = await removeOrder(id);
-    console.log(res);
-    refetch();
-    toast.success("Order deleted successfully");
-  };
+const AdminOrderManagement = () => {
+  const { data, isLoading, isFetching } = useGetOrdersQuery(undefined, {
+    refetchOnMountOrArgChange: true,
+  });
+
   console.log(data);
   const orders = data?.data || [];
 
   return (
     <div className="container mx-auto p-[16px]">
-      <h2 className="text-[28px] font-[700] mb-[16px]">Your Orders</h2>
+      <h2 className="text-[28px] font-[700] mb-[16px]">All Orders</h2>
 
       {isLoading || isFetching ? (
         <LoadingAnimation />
@@ -44,6 +27,9 @@ const UserOrderManagement = () => {
                   Order ID
                 </th>
                 <th className="px-[24px] py-[16px] text-[16px] font-[700]">
+                  Order Email
+                </th>
+                <th className="px-[24px] py-[16px] text-[16px] font-[700]">
                   Total Price
                 </th>
                 <th className="px-[24px] py-[16px] text-[16px] font-[700]">
@@ -52,9 +38,6 @@ const UserOrderManagement = () => {
                 <th className="px-[24px] py-[16px] text-[16px] font-[700]">
                   Ordered At
                 </th>
-                <th className="px-[24px] py-[16px] text-[16px] font-[700]">
-                  Actions
-                </th>
               </tr>
             </thead>
             <tbody>
@@ -62,6 +45,9 @@ const UserOrderManagement = () => {
                 <tr key={order._id}>
                   <td className="!px-[24px] py-[16px] text-[16px] text-[#424242] bg-[#9DEEB3] font-[500]">
                     {order._id}
+                  </td>
+                  <td className="!px-[24px] py-[16px] text-[16px] text-[#424242] bg-[#9DEEB3] font-[500]">
+                    {order.userEmail}
                   </td>
                   <td className="px-[24px] py-[16px] text-[16px] text-[#424242] bg-[#9DEEB3] font-[500]">
                     ${order.totalPrice}
@@ -80,12 +66,6 @@ const UserOrderManagement = () => {
                   <td className="px-[24px] py-[16px] text-[16px] bg-[#9DEEB3] text-[#424242] font-[500]">
                     {new Date(order.createdAt).toLocaleDateString()}
                   </td>
-                  <td className="flex items-center justify-center bg-[#9DEEB3] w-full h-full ">
-                    <ZButton
-                      onClick={() => handleDelete(order._id)}
-                      name="Delete"
-                    ></ZButton>
-                  </td>
                 </tr>
               ))}
             </tbody>
@@ -96,4 +76,4 @@ const UserOrderManagement = () => {
   );
 };
 
-export default UserOrderManagement;
+export default AdminOrderManagement;

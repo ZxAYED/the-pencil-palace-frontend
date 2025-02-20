@@ -16,6 +16,7 @@ import ProductInfo from "../components/AllProducts/ProductInfo";
 import ChangePassword from "../components/Auth/ChangePassword";
 import ResetPassword from "../components/Auth/ResetPassword";
 
+import AdminOrderManagement from "../components/AdminDashboard/AdminOrderManagement";
 import PaymentPage from "../components/CheckoutPage/PaymentPage";
 import UserDashboard from "../components/UserDashboard/UserDashboard";
 
@@ -81,6 +82,14 @@ const routes = createBrowserRouter([
         element: (
           <PrivateRoute>
             <GetAllProducts />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/admin/dashboard/orders",
+        element: (
+          <PrivateRoute>
+            <AdminOrderManagement />
           </PrivateRoute>
         ),
       },

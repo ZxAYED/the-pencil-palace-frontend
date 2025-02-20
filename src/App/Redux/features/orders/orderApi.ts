@@ -34,7 +34,15 @@ const orderApi = baseApi.injectEndpoints({
         }),
         getOrder: builder.query({
             query: (orderId) => ({
-                url: `/orders/${orderId}`,
+                url: `/orders/user/${orderId}`,
+                method: "GET",
+
+            }),
+            providesTags: ["Order"],
+        }),
+        getOrderOfUser: builder.query({
+            query: (email) => ({
+                url: `/orders/dashboard/${email}`,
                 method: "GET",
 
             }),
@@ -71,7 +79,14 @@ const orderApi = baseApi.injectEndpoints({
             }),
             invalidatesTags: ["Cart"],
         }),
+        removeOrder: builder.mutation({
+            query: (id) => ({
+                url: `/orders/order/${id}`,
+                method: "DELETE",
+            }),
+            invalidatesTags: ["Cart"],
+        }),
 
     })
 })
-export const { useGetOrdersQuery, useAddToCartMutation, useGetCartItemsQuery, useCreateOrderMutation, useRemoveFromCartMutation, useVerifyOrderMutation, useMakePaymentMutation, useGetOrderQuery } = orderApi;
+export const { useGetOrdersQuery, useAddToCartMutation, useGetCartItemsQuery, useCreateOrderMutation, useRemoveFromCartMutation, useVerifyOrderMutation, useMakePaymentMutation, useGetOrderQuery, useGetOrderOfUserQuery, useRemoveOrderMutation } = orderApi;

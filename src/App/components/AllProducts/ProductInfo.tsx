@@ -58,9 +58,12 @@ const ProductInfo = () => {
       const res = await addToCart(cartData);
 
       toast.success(`${data?.data?.name} added to cart`, { id: toastId });
-      if (res.data.message) {
+      refetch();
+      if (res.data.success) {
         toast.error(res.data.message, { id: toastId });
-        refetch();
+      }
+      if (!res.data.success) {
+        toast.error(res.data.message, { id: toastId });
       }
     } catch (error) {
       toast.error("Error adding to cart", { id: toastId });
@@ -104,7 +107,7 @@ const ProductInfo = () => {
             alignItems: "start",
             width: { xs: "100%", md: "100%", lg: "50%" },
             height: "full",
-            marginTop: "36px",
+            marginTop: "16px",
           }}
         >
           <img
