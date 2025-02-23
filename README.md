@@ -2,6 +2,10 @@
 
 Welcome to **The Pencil Palace**, your ultimate destination for high-quality stationery and office supplies! 🏢📚 Whether you're a student, artist, or professional, we've got everything you need to fuel your creativity and productivity. ✨
 
+🌐 Live Demo
+
+The Pencil Palace Frontend: [The Pencil Palace](https://the-pencil-palace.netlify.app)
+
 ---
 
 ## About This Website
