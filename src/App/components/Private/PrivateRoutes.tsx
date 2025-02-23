@@ -1,8 +1,8 @@
-// PrivateRoute.tsx
-import React, { ReactNode, useState, useEffect } from "react";
+// import { ReactNode, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../Redux/store";
 
+import { ReactNode, useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 import LoadingAnimation from "../../utils/LoadingAnimation";
 

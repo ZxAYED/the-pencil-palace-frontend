@@ -18,6 +18,8 @@ import ResetPassword from "../components/Auth/ResetPassword";
 
 import AdminOrderManagement from "../components/AdminDashboard/AdminOrderManagement";
 import PaymentPage from "../components/CheckoutPage/PaymentPage";
+import PaymentResponse from "../components/CheckoutPage/PaymentResponse";
+import ErrorPage from "../components/ErrorElement/ErrorPage";
 import UserDashboard from "../components/UserDashboard/UserDashboard";
 
 const routes = createBrowserRouter([
@@ -25,6 +27,7 @@ const routes = createBrowserRouter([
     path: "/",
 
     element: <App />,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: "/",
@@ -46,6 +49,7 @@ const routes = createBrowserRouter([
   },
   {
     path: "/admin/dashboard",
+
     element: (
       <PrivateRoute>
         <AdminLayout />
@@ -53,58 +57,35 @@ const routes = createBrowserRouter([
     ),
     children: [
       {
-        path: "/admin/dashboard",
-        element: (
-          <PrivateRoute>
-            <AdminDashboard />
-          </PrivateRoute>
-        ),
+        index: true,
+        element: <AdminDashboard />,
       },
 
       {
         path: "/admin/dashboard/create-product",
-        element: (
-          <PrivateRoute>
-            <CreateProduct />
-          </PrivateRoute>
-        ),
+        element: <CreateProduct />,
       },
       {
         path: "/admin/dashboard/create-product",
-        element: (
-          <PrivateRoute>
-            <CreateProduct />
-          </PrivateRoute>
-        ),
+        element: <CreateProduct />,
       },
       {
         path: "/admin/dashboard/all-products",
-        element: (
-          <PrivateRoute>
-            <GetAllProducts />
-          </PrivateRoute>
-        ),
+        element: <GetAllProducts />,
       },
       {
         path: "/admin/dashboard/orders",
-        element: (
-          <PrivateRoute>
-            <AdminOrderManagement />
-          </PrivateRoute>
-        ),
+        element: <AdminOrderManagement />,
       },
       {
         path: "/admin/dashboard/users",
-        element: (
-          <PrivateRoute>
-            <UserManagement />
-          </PrivateRoute>
-        ),
+        element: <UserManagement />,
       },
     ],
   },
   {
     path: "/user/dashboard",
+
     element: (
       <PrivateRoute>
         <AdminLayout />
@@ -136,6 +117,10 @@ const routes = createBrowserRouter([
   {
     path: "/payment/:orderId",
     element: <PaymentPage />,
+  },
+  {
+    path: "/payment/response",
+    element: <PaymentResponse />,
   },
   {
     path: "/register",

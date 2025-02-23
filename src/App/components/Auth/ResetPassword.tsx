@@ -1,13 +1,13 @@
+import { Box, Button, TextField, Typography } from "@mui/material";
+import {
+  Controller,
+  FieldValues,
+  SubmitHandler,
+  useForm,
+} from "react-hook-form";
 import { useSearchParams } from "react-router-dom";
 import { toast } from "sonner";
 import { useResetPasswordMutation } from "../../Redux/features/Auth/authApi";
-import {
-  useForm,
-  Controller,
-  SubmitHandler,
-  FieldValues,
-} from "react-hook-form";
-import { Box, Button, TextField, Typography } from "@mui/material";
 
 const ResetPassword = () => {
   const [searchParams] = useSearchParams();
@@ -23,6 +23,7 @@ const ResetPassword = () => {
     };
     try {
       const res = await resetPassword(payload).unwrap();
+      console.log(res);
       toast.success("Password reset successful!");
     } catch (err) {
       toast.error("Failed to reset password.");

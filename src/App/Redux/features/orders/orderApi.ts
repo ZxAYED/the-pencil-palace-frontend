@@ -48,6 +48,14 @@ const orderApi = baseApi.injectEndpoints({
             }),
             providesTags: ["Order"],
         }),
+        getSingleOrderOfUser: builder.query({
+            query: (orderId) => ({
+                url: `/orders/user/singleOrder/${orderId}`,
+                method: "GET",
+
+            }),
+            providesTags: ["Order"],
+        }),
         createOrder: builder.mutation({
             query: (order) => ({
                 url: "/orders",
@@ -56,14 +64,7 @@ const orderApi = baseApi.injectEndpoints({
             }),
             invalidatesTags: ["Order"],
         }),
-        verifyOrder: builder.mutation({
-            query: () => ({
-                url: "/orders/payment/verify-payment",
-                method: "GET",
 
-            }),
-            invalidatesTags: ["Order"],
-        }),
         makePayment: builder.mutation({
             query: (payload) => ({
                 url: "/orders/payment",
@@ -86,7 +87,22 @@ const orderApi = baseApi.injectEndpoints({
             }),
             invalidatesTags: ["Cart"],
         }),
+        generateRevenue: builder.query({
+            query: () => ({
+                url: "/orders/admin-revenue",
+                method: "GET",
 
+            }),
+
+        }),
+        verifyPayment: builder.query({
+            query: (order_id) => ({
+                url: "/orders/payment/verify-payment",
+                method: "GET",
+                params: { order_id }
+            }),
+
+        }),
     })
 })
-export const { useGetOrdersQuery, useAddToCartMutation, useGetCartItemsQuery, useCreateOrderMutation, useRemoveFromCartMutation, useVerifyOrderMutation, useMakePaymentMutation, useGetOrderQuery, useGetOrderOfUserQuery, useRemoveOrderMutation } = orderApi;
+export const { useGetOrdersQuery, useAddToCartMutation, useGetCartItemsQuery, useCreateOrderMutation, useRemoveFromCartMutation, useVerifyPaymentQuery, useMakePaymentMutation, useGetOrderQuery, useGenerateRevenueQuery, useGetOrderOfUserQuery, useRemoveOrderMutation, useGetSingleOrderOfUserQuery } = orderApi;

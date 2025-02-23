@@ -61,20 +61,20 @@ const UserOrderManagement = () => {
               {orders.map((order: any) => (
                 <tr key={order._id}>
                   <td className="!px-[24px] py-[16px] text-[16px] text-[#424242] bg-[#9DEEB3] font-[500]">
-                    {order._id}
+                    {order.OrderId ? order.OrderId : order._id}
                   </td>
                   <td className="px-[24px] py-[16px] text-[16px] text-[#424242] bg-[#9DEEB3] font-[500]">
                     ${order.totalPrice}
                   </td>
                   <td className="px-[24px] bg-[#9DEEB3] py-[16px] text-[16px]">
                     <span
-                      className={`px-[10px] py-[6px] rounded-[5px] font-[700] text-[16px] ${
-                        order.status === "Delivered"
-                          ? "bg-[#9DEEB3] text-[#424242]"
+                      className={`px-[12px] py-[8px] rounded-[5px] font-[700] text-[16px] ${
+                        order.payment.status === "Paid"
+                          ? "bg-[#7cc08e] text-[#424242]"
                           : "bg-[#FDCFD2] text-[#424242]"
                       }`}
                     >
-                      {order.status}
+                      {order.payment.status}
                     </span>
                   </td>
                   <td className="px-[24px] py-[16px] text-[16px] bg-[#9DEEB3] text-[#424242] font-[500]">

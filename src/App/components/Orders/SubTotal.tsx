@@ -27,7 +27,7 @@ const SubTotal = ({ cartData }: { cartData: any }) => {
     };
     try {
       const res = await createOrder(payload);
-      console.log(res);
+
       if (res.data.success) {
         navigate(`/payment/${res.data.data._id}`);
       }

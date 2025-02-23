@@ -7,7 +7,6 @@ const AdminOrderManagement = () => {
     refetchOnMountOrArgChange: true,
   });
 
-  console.log(data);
   const orders = data?.data || [];
 
   return (
@@ -60,7 +59,7 @@ const AdminOrderManagement = () => {
                           : "bg-[#FDCFD2] text-[#424242]"
                       }`}
                     >
-                      {order.status}
+                      {order.payment.status}
                     </span>
                   </td>
                   <td className="px-[24px] py-[16px] text-[16px] bg-[#9DEEB3] text-[#424242] font-[500]">

@@ -1,70 +1,126 @@
-import React, { useState } from "react";
-import {
-  Box,
-  Typography,
-  Drawer,
-  List,
-  ListItem,
-  ListItemText,
-} from "@mui/material";
+import { Box, Card, CardContent, Typography } from "@mui/material";
+import { ResponsiveBar } from "@nivo/bar"; // Nivo Bar Chart
+import { useGenerateRevenueQuery } from "../../Redux/features/orders/orderApi";
+import SocialSection from "../../utils/SocialSection";
 
 function AdminDashboard() {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const { data: revenueData, isLoading } = useGenerateRevenueQuery(undefined, {
+    refetchOnMountOrArgChange: true,
+  });
+
+  console.log(revenueData);
+
+  const stats = [
+    { title: "Total Orders", value: 1250 },
+    { title: "Total Users", value: 3478 },
+    { title: "Total Products", value: 142 },
+    { title: "Monthly Revenue", value: `$${revenueData?.totalRevenue || 0}` },
+  ];
 
   return (
-    <Box className="flex h-screen bg-gray-100">
-      <Drawer
-        open={sidebarOpen}
-        onClose={() => setSidebarOpen(false)}
-        sx={{
-          width: 240,
-          flexShrink: 0,
-          "& .MuiDrawer-paper": {
-            width: 240,
-            backgroundColor: "white",
-            borderRight: "1px solid #E0E0E0",
-          },
-        }}
-        variant="persistent"
-        anchor="left"
-      >
-        <Box className="flex flex-col h-full pt-[20px] px-[16px]">
-          <List>
-            <ListItem button>
-              <ListItemText primary="Dashboard" />
-            </ListItem>
-            <ListItem button>
-              <ListItemText primary="Orders" />
-            </ListItem>
-            <ListItem button>
-              <ListItemText primary="Products" />
-            </ListItem>
-            <ListItem button>
-              <ListItemText primary="Customers" />
-            </ListItem>
-            <ListItem button>
-              <ListItemText primary="Reports" />
-            </ListItem>
-          </List>
-        </Box>
-      </Drawer>
+    <Box
+      sx={{
+        textAlign: {
+          xs: "center",
+          md: "left",
+        },
+      }}
+      className="flex  justify-center flex-col p-[16px]  mt-[16px]"
+    >
+      <Typography variant="h4" fontWeight="bold" color="#424242" mb={2}>
+        Welcome to Pencil Palace Website
+      </Typography>
+      <Typography variant="body1" color="#757575" mb={3}>
+        Pencil Palace is your go-to destination for premium stationery. Join our
+        thousands of followers and stay updated with the latest products and
+        offers!
+      </Typography>
 
-      <Box className="flex-1 p-[16px] sm:ml-[256px]">
-        <Box className="w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700 p-[12px]">
-          <Typography
-            variant="h6"
-            className="text-gray-900 dark:text-white text-[22px] font-bold"
+      <Box
+        display="grid"
+        gridTemplateColumns={{ xs: "1fr", md: "repeat(4, 1fr)" }}
+        gap={3}
+      >
+        {stats.map((stat, index) => (
+          <Card
+            key={index}
+            sx={{
+              textAlign: "center",
+              p: 3,
+              backgroundColor: "#FFF3E0",
+              borderRadius: "8px",
+              boxShadow: "0px 4px 10px rgba(0,0,0,0.1)",
+            }}
           >
-            Admin Dashboard
-          </Typography>
-        </Box>
-        s
-        <Box className="pt-[5px]">
-          <Typography className="text-[18px] text-gray-800 font-semibold">
-            Welcome to the Admin Panel! Here you can manage all the features.
-          </Typography>
-        </Box>
+            <CardContent>
+              <Typography variant="h6" fontWeight="bold">
+                {stat.title}
+              </Typography>
+              <Typography variant="h5" color="primary" fontWeight="bold">
+                {stat.value}
+              </Typography>
+            </CardContent>
+          </Card>
+        ))}
       </Box>
+
+      <Box
+        mt={5}
+        p={3}
+        bgcolor="white"
+        borderRadius="8px"
+        boxShadow="0px 4px 10px rgba(0,0,0,0.1)"
+      >
+        <Typography variant="h5" fontWeight="bold" textAlign="center" mb={2}>
+          Monthly Revenue
+        </Typography>
+        {isLoading ? (
+          <Typography textAlign="center">Loading revenue data...</Typography>
+        ) : (
+          <Box height={350}>
+            <ResponsiveBar
+              data={revenueData?.monthlyRevenue || []}
+              keys={["revenue"]}
+              indexBy="month"
+              margin={{ top: 20, right: 30, bottom: 50, left: 60 }}
+              padding={0.3}
+              colors={["#FF7043"]}
+              axisBottom={{
+                tickSize: 5,
+                tickPadding: 5,
+                tickRotation: 0,
+                legend: "Month",
+                legendPosition: "middle",
+                legendOffset: 40,
+              }}
+              axisLeft={{
+                tickSize: 5,
+                tickPadding: 5,
+                tickRotation: 0,
+                legend: "Revenue ($)",
+                legendPosition: "middle",
+                legendOffset: -50,
+              }}
+              enableLabel={false}
+              tooltip={({ id, value, color }) => (
+                <Box
+                  sx={{
+                    backgroundColor: color,
+                    color: "#fff",
+                    p: 1,
+                    borderRadius: "5px",
+                    fontSize: "14px",
+                  }}
+                >
+                  {id}: ${value}
+                </Box>
+              )}
+            />
+          </Box>
+        )}
+      </Box>
+
+      <SocialSection />
     </Box>
   );
 }

@@ -38,7 +38,7 @@ const PaymentPage = () => {
     const res = await makePayment(surjoPayload);
     console.log(res);
     if (res.data.success) {
-      // navigate(`/payment/${res.data.data._id}`);
+      window.location.href = res.data.data;
     }
   };
 
@@ -133,6 +133,7 @@ const PaymentPage = () => {
                   justifyContent: "center",
                 }}
               >
+                {/* <button>{isLoading ? "Processing..." : "Pay Now"}</button> */}
                 <ZButton name={isLoading ? "Processing..." : "Pay Now"} />
               </Box>
             </ZForm>

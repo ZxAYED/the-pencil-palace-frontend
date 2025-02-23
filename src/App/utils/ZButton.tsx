@@ -11,7 +11,7 @@ const ZButton = ({
 }) => {
   return (
     <Button
-      type="button"
+      type="submit"
       variant="contained"
       className="Zbutton Ztype1 Zbtn-txt !px-[24px] !py-[12px] font-raleway"
       fullWidth={fullWidth}

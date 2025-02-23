@@ -1,13 +1,13 @@
+import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import "./index.css";
-import { createTheme, ThemeProvider, CssBaseline } from "@mui/material";
+import { Provider } from "react-redux";
 import { RouterProvider } from "react-router-dom";
-import routes from "./App/routes/routes";
 import { ParallaxProvider } from "react-scroll-parallax";
 import { Toaster } from "sonner";
-import { Provider } from "react-redux";
 import { store } from "./App/Redux/store";
+import routes from "./App/routes/routes";
+import "./index.css";
 
 const customTheme = createTheme({
   palette: {
@@ -87,9 +87,9 @@ export default customTheme;
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <Provider store={store}>
-      <ParallaxProvider>
-        <ThemeProvider theme={customTheme}>
+    <ThemeProvider theme={customTheme}>
+      <Provider store={store}>
+        <ParallaxProvider>
           <CssBaseline />
           <RouterProvider router={routes} />
           <Toaster
@@ -102,8 +102,8 @@ createRoot(document.getElementById("root")!).render(
               className: "class",
             }}
           />
-        </ThemeProvider>
-      </ParallaxProvider>
-    </Provider>
+        </ParallaxProvider>
+      </Provider>
+    </ThemeProvider>
   </StrictMode>
 );
