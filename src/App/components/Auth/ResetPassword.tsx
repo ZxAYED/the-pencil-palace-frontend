@@ -22,8 +22,8 @@ const ResetPassword = () => {
       newPassword: data.password,
     };
     try {
-      const res = await resetPassword(payload).unwrap();
-      console.log(res);
+      await resetPassword(payload).unwrap();
+
       toast.success("Password reset successful!");
     } catch (err) {
       toast.error("Failed to reset password.");

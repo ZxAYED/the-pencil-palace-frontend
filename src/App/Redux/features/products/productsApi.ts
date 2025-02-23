@@ -10,19 +10,22 @@ const productsApi = baseApi.injectEndpoints({
         getProducts: builder.query({
             query: (args) => {
                 const params = new URLSearchParams();
+
                 if (args) {
                     args.forEach((i: filterParams) => {
-                        params.append(i.name, i.value)
-                        console.log(Object.fromEntries(params));
+                        if (Array.isArray(i.value)) {
 
-                    })
+                            params.append(i.name, i.value.join(","));
+                        } else {
+                            params.append(i.name, i.value);
+                        }
+                    });
                 }
+
                 return {
-                    url: "/products",
+                    url: `/products?${params.toString()}`,
                     method: "GET",
-
-                    params: params,
-                }
+                };
             },
             providesTags: ["Product"],
         }),

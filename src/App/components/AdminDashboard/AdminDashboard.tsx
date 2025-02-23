@@ -8,8 +8,6 @@ function AdminDashboard() {
     refetchOnMountOrArgChange: true,
   });
 
-  console.log(revenueData);
-
   const stats = [
     { title: "Total Orders", value: 1250 },
     { title: "Total Users", value: 3478 },

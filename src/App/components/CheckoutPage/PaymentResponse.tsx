@@ -33,7 +33,7 @@ const PaymentResponse = () => {
   const user = useAppSelector(selectCurrentUser);
 
   const { data: orderInfo, isLoading, error } = useVerifyPaymentQuery(orderId);
-  console.log(orderInfo);
+
   const orderData = orderInfo?.data[0] || [];
   const { data: productInfo } = useGetSingleOrderOfUserQuery(orderId);
   const productData = productInfo?.data || [];

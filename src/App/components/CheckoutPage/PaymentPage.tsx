@@ -34,7 +34,7 @@ const PaymentPage = () => {
     };
 
     const res = await makePayment(surjoPayload);
-    console.log(res);
+
     if (res.data.success) {
       window.location.href = res.data.data;
     }

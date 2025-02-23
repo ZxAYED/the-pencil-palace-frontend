@@ -9,7 +9,7 @@ import { useAppDispatch } from "../../Redux/hook";
 import ZButton from "../../utils/ZButton";
 import ZForm from "../../utils/ZForm";
 import ZTextField from "../../utils/ZTextField";
-import ResetPasswordRequestModal from "./ResetPass";
+import ResetPasswordRequestModal from "./ResetPasswordRequestModal";
 
 const Login = () => {
   const [login] = useLoginMutation();
@@ -35,7 +35,6 @@ const Login = () => {
       }
     } catch (err) {
       toast.error("Something went wrong", { id: toastId });
-      console.log(err);
     }
   };
   return (

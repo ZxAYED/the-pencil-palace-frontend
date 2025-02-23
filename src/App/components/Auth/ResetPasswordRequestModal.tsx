@@ -1,15 +1,14 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+import { Box, Drawer, TextField, Typography } from "@mui/material";
 import { useState } from "react";
-import { Box, Typography, Drawer, TextField } from "@mui/material";
 import {
-  useForm,
   Controller,
-  SubmitHandler,
   FieldValues,
+  SubmitHandler,
+  useForm,
 } from "react-hook-form";
-import ZButton from "../../utils/ZButton";
 import { toast } from "sonner";
 import { useResetPassReqMutation } from "../../Redux/features/Auth/authApi";
+import ZButton from "../../utils/ZButton";
 
 const ResetPasswordRequestModal = () => {
   const [open, setOpen] = useState(false);
@@ -20,18 +19,15 @@ const ResetPasswordRequestModal = () => {
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const toastId = toast.loading("Submitting password reset request...");
-    console.log(data);
+
     try {
       const res = await resetPassReq(data).unwrap();
-      console.log(res);
 
       if (res.success) {
         toast.success(
           "Password reset link sent to your email. Check your inbox or spam folder.",
           { id: toastId }
         );
-      } else {
-        toast.error(res.message, { id: toastId });
       }
 
       handleToggleDrawer(false);
@@ -86,7 +82,7 @@ const ResetPasswordRequestModal = () => {
                   fullWidth
                   error={!!fieldState.error}
                   helperText={fieldState.error?.message}
-                  sx={{ mb: 3, backgroundColor: "#757575" }}
+                  sx={{ mb: 3 }}
                   InputProps={{
                     sx: {
                       color: "#424242",

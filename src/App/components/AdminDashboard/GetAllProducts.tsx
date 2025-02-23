@@ -23,7 +23,7 @@ const GetAllProducts = () => {
   );
 
   const [deleteProduct, { isLoading: isDeleting }] = useDeleteProductMutation();
-  console.log(data);
+
   const products = data?.data || <LoadingAnimation />;
 
   const handleDelete = async (productId: string) => {

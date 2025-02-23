@@ -17,7 +17,7 @@ const PrivateRoute: React.FC<ReactNode> = ({ children }: ReactNode) => {
       setLoading(true);
     }
   }, [user]);
-  console.log(user);
+
   if (loading) {
     return <LoadingAnimation />;
   }

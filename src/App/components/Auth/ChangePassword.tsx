@@ -1,11 +1,11 @@
+import { Box, Button, Typography } from "@mui/material";
 import { Controller, FieldValues, SubmitHandler } from "react-hook-form";
-import ZForm from "../../utils/ZForm";
-import { Button, Box, Typography } from "@mui/material";
-import ZTextField from "../../utils/ZTextField";
 import { Link, useNavigate } from "react-router-dom";
-import logo from "../../../assets/LOGIN.png";
 import { toast } from "sonner";
+import logo from "../../../assets/LOGIN.png";
 import { useChangePasswordMutation } from "../../Redux/features/Auth/authApi";
+import ZForm from "../../utils/ZForm";
+import ZTextField from "../../utils/ZTextField";
 
 const ChangePassword = () => {
   const [changePassword] = useChangePasswordMutation();
@@ -25,7 +25,7 @@ const ChangePassword = () => {
       }
     } catch (err) {
       toast.error("Something went wrong", { id: toastId });
-      console.log(err);
+      console.error(err);
     }
   };
 

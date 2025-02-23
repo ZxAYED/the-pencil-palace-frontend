@@ -1,17 +1,17 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useState, Fragment } from "react";
-import { Box, Typography, Drawer } from "@mui/material";
-import { useForm, SubmitHandler, FieldValues } from "react-hook-form";
+import { Box, Drawer, Typography } from "@mui/material";
+import { Fragment, useState } from "react";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 
 import ZForm from "../../utils/ZForm";
 
 import { toast } from "sonner";
 import { useUpdateProductMutation } from "../../Redux/features/products/productsApi";
 import LoadingAnimation from "../../utils/LoadingAnimation";
-import ZSelectOptional from "../../utils/ZSelectOptional";
-import ZTextFieldOptional from "../../utils/ZTextFieldOpional";
 import ZButton from "../../utils/ZButton";
 import ZRatingFieldOptional from "../../utils/ZRatingFieldOptional";
+import ZSelectOptional from "../../utils/ZSelectOptional";
+import ZTextFieldOptional from "../../utils/ZTextFieldOpional";
 
 const UpdateProduct = ({
   product,
@@ -54,11 +54,10 @@ const UpdateProduct = ({
     if (data?.profileImage && data?.profileImage instanceof File) {
       formData.append("profileImage", data?.profileImage);
     }
-    console.log(Object.fromEntries(formData));
+
     const res = await updateProduct({ id: product._id, product: formData });
 
     if (!res?.data?.success) {
-      console.log(res);
       toast.error(res?.data?.message, { id: toastId });
     } else {
       toast.success("Product updated successfully", { id: toastId });

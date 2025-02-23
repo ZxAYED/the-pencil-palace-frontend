@@ -22,16 +22,20 @@ const SearchAndSortFields = ({ setArgs }: { setArgs: (args: any) => void }) => {
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    let filter = [];
+    let filter: any[] = [];
+
     if (data.searchTerm) {
       filter.push({ name: "searchTerm", value: data.searchTerm });
     }
+
     if (selectedCategories.length) {
       filter.push({ name: "categories", value: selectedCategories });
     }
+
     if (data.priceRange) {
       filter.push({ name: "priceRange", value: data.priceRange });
     }
+
     if (data.sortOrder) {
       filter.push({ name: "sortOrder", value: data.sortOrder });
     }
@@ -56,9 +60,8 @@ const SearchAndSortFields = ({ setArgs }: { setArgs: (args: any) => void }) => {
 
   const handleCategoryChange = (event: any) => {
     const { value } = event.target;
-    setSelectedCategories(typeof value === "string" ? value.split(",") : value);
+    setSelectedCategories(Array.isArray(value) ? value : value.split(","));
   };
-
   return (
     <Box className="p-4 space-y-4 rounded-lg bg-[#fff3e0] flex flex-col">
       <ZForm onSubmit={handleSubmit(onSubmit)}>

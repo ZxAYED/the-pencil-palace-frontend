@@ -15,7 +15,6 @@ const AllProducts = () => {
     refetchOnFocus: true,
     refetchOnReconnect: true,
   });
-  console.log(products);
 
   const handleChange = (e: React.ChangeEvent<unknown>, value: number) => {
     setPage(value);

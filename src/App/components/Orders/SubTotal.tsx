@@ -32,7 +32,7 @@ const SubTotal = ({ cartData }: { cartData: any }) => {
         navigate(`/payment/${res.data.data._id}`);
       }
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   };
   return (

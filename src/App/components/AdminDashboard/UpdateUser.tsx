@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useState, Fragment } from "react";
-import { Box, Typography, Drawer, Divider } from "@mui/material";
-import { useForm, SubmitHandler, FieldValues } from "react-hook-form";
-import ZForm from "../../utils/ZForm";
+import { Box, Divider, Drawer, Typography } from "@mui/material";
+import { Fragment, useState } from "react";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "sonner";
+import { useUpdateUserMutation } from "../../Redux/features/Auth/authApi";
 import LoadingAnimation from "../../utils/LoadingAnimation";
 import ZButton from "../../utils/ZButton";
+import ZForm from "../../utils/ZForm";
 import ZSelect from "../../utils/ZSelect";
-import { useUpdateUserMutation } from "../../Redux/features/Auth/authApi";
 
 const UpdateUser = ({ user, refetch }: { user: any; refetch: () => void }) => {
   const [open, setOpen] = useState(false);
@@ -36,12 +36,10 @@ const UpdateUser = ({ user, refetch }: { user: any; refetch: () => void }) => {
       status: data.status,
       isDeleted,
     };
-    console.log(userData);
+
     const res = await updateUser({ id: _id, user: userData });
-    console.log(res);
 
     if (!res?.data?.success) {
-      console.log(res);
       toast.error(res?.data?.message, { id: toastId });
     } else {
       toast.success("Product updated successfully", { id: toastId });

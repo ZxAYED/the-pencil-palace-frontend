@@ -19,12 +19,12 @@ const UserOrderManagement = () => {
     }
   );
   const handleDelete = async (id: string) => {
-    const res = await removeOrder(id);
-    console.log(res);
+    await removeOrder(id);
+
     refetch();
     toast.success("Order deleted successfully");
   };
-  console.log(data);
+
   const orders = data?.data || [];
 
   return (

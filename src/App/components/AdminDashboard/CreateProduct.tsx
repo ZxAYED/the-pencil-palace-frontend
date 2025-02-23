@@ -42,7 +42,6 @@ const CreateProduct = () => {
 
     const res = await createProduct(formData);
     if (!res?.data?.success) {
-      console.log(res);
       toast.error(res?.data?.message, {
         id: toastId,
       });
