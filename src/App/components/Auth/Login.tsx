@@ -1,13 +1,14 @@
+import { Box, Button, Typography } from "@mui/material";
 import { FieldValues, SubmitHandler } from "react-hook-form";
-import ZForm from "../../utils/ZForm";
-import { Button, Box, Typography } from "@mui/material";
-import ZTextField from "../../utils/ZTextField";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 import logo from "../../../assets/LOGIN.png";
 import { useLoginMutation } from "../../Redux/features/Auth/authApi";
-import { toast } from "sonner";
 import { setUser } from "../../Redux/features/Auth/authSlice";
 import { useAppDispatch } from "../../Redux/hook";
+import ZButton from "../../utils/ZButton";
+import ZForm from "../../utils/ZForm";
+import ZTextField from "../../utils/ZTextField";
 import ResetPasswordRequestModal from "./ResetPass";
 
 const Login = () => {
@@ -66,14 +67,7 @@ const Login = () => {
                   <ResetPasswordRequestModal></ResetPasswordRequestModal>
                 </Box>
               </Box>
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                className="bg-[#29b6f6] text-white p-[12px] rounded-sm text-[14px] !font-[600] hover:bg-[#333333]"
-              >
-                Sign in
-              </Button>
+              <ZButton type="submit" fullWidth name="Login"></ZButton>
             </Box>
 
             <Typography
