@@ -1,50 +1,75 @@
-# React + TypeScript + Vite
+# The Pencil Palace ✏️🛍️
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Welcome to **The Pencil Palace**, your ultimate destination for high-quality stationery and office supplies! 🏢📚 Whether you're a student, artist, or professional, we've got everything you need to fuel your creativity and productivity. ✨
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## About This Website
 
-## Expanding the ESLint configuration
+**The Pencil Palace** is a **user-based e-commerce platform** that offers a seamless online shopping experience for stationery lovers.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+### 🛒 Features & Functionality
 
-- Configure the top-level `parserOptions` property like this:
+- **Browse Without Login:** Users can explore the **Home Page, About Us, and Products** sections freely.
+- **User Authentication:**
+  - Register and log in to access exclusive features.
+  - Forgot Password? No worries! Users receive an email with a reset link to change their password securely. 🔐
+- **Shopping Experience:**
+  - View **detailed product descriptions** after logging in.
+  - Add items to the **cart** and proceed to **checkout**.
+  - Enter **delivery information** and proceed to **ShurjoPay payment gateway**.
+  - Get redirected back to the website to view the **payment response**.
+- **User Dashboard:**
+  - View order history and purchased products. 🛍️
+- **Admin Panel:**
+  - **Manage Products:** Create, update, modify, or delete products. 📦
+  - **Order Management:** View all orders and their statuses.
+  - **User Management:** Block or delete users as necessary.
+- **Error Handling:** A dedicated **404 Error Page** ensures smooth navigation.
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+---
+
+## 🏗️ Tech Stack
+
+**Frontend:** React (Vite) + TypeScript, MUI, TailwindCSS, Redux Toolkit, Firebase Auth, Swiper.js, Recharts, Framer Motion
+
+**Backend:** Express.js, MongoDB, Mongoose, JWT Authentication, Cloudinary, Multer, Nodemailer, ShurjoPay Integration
+
+---
+
+## 🛠️ Installation & Setup
+
+### Clone the Repository
+
+```sh
+git clone https://github.com/your-username/the-pencil-palace.git
+cd the-pencil-palace
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+### Install Dependencies
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+#### Frontend
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+```sh
+cd frontend
+npm install
+npm run dev
 ```
+
+#### Backend
+
+```sh
+cd backend
+npm install
+npm run dev
+```
+
+---
+
+---
+
+## 📜 License
+
+This project is licensed under the MIT License.
+
+Happy Shopping at **The Pencil Palace**! ✨🛒
