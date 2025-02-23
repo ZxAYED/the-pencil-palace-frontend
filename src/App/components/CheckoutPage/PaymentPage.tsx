@@ -1,6 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import { FieldValues, SubmitHandler } from "react-hook-form";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import img from "../../../assets/payment banner.webp";
 import { selectCurrentUser } from "../../Redux/features/Auth/authSlice";
 import {
@@ -13,8 +13,6 @@ import ZForm from "../../utils/ZForm";
 import ZTextField from "../../utils/ZTextField";
 
 const PaymentPage = () => {
-  const navigate = useNavigate();
-
   const { orderId } = useParams();
 
   const { data: orderData } = useGetOrderQuery(orderId);

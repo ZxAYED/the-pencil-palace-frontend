@@ -1,14 +1,13 @@
-import ZTextField from "../../utils/ZTextField";
-import { Typography } from "@mui/material";
-import { Box } from "@mui/material";
-import ZForm from "../../utils/ZForm";
+import { Box, Typography } from "@mui/material";
 import { FieldValues, SubmitHandler } from "react-hook-form";
-import ZRatingField from "../../utils/ZRatingField";
-import ZButton from "../../utils/ZButton";
-import { useCreateProductMutation } from "../../Redux/features/products/productsApi";
 import { toast } from "sonner";
-import LoadingAnimation from "./../../utils/LoadingAnimation";
+import { useCreateProductMutation } from "../../Redux/features/products/productsApi";
+import ZButton from "../../utils/ZButton";
+import ZForm from "../../utils/ZForm";
+import ZRatingField from "../../utils/ZRatingField";
 import ZSelect from "../../utils/ZSelect";
+import ZTextField from "../../utils/ZTextField";
+import LoadingAnimation from "./../../utils/LoadingAnimation";
 
 const CreateProduct = () => {
   const [createProduct, { isLoading }] = useCreateProductMutation();
@@ -68,7 +67,12 @@ const CreateProduct = () => {
       className="container !mt-[40px] mx-auto"
     >
       <ZForm onSubmit={onSubmit}>
-        <Typography color="#424242" variant="h4" textAlign="center">
+        <Typography
+          color="#424242"
+          variant="h4"
+          textAlign="center"
+          fontWeight={700}
+        >
           Create a New Product -The Pencil Palace
         </Typography>
         <Typography

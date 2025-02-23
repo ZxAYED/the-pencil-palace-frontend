@@ -1,10 +1,10 @@
-import { Box, Typography, Button } from "@mui/material";
-import { motion } from "framer-motion";
-import img from "../../../assets/logo.webp";
-import { Link } from "react-router-dom";
-import img2 from "../../../assets/ofc.png";
-import bg from "../../../assets/aboutUs2.webp";
 import VerifiedIcon from "@mui/icons-material/Verified";
+import { Box, Button, Typography } from "@mui/material";
+import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+import bg from "../../../assets/aboutUs2.webp";
+import img from "../../../assets/logo.webp";
+import img2 from "../../../assets/ofc.png";
 
 const AboutUs = () => {
   return (
@@ -25,7 +25,7 @@ const AboutUs = () => {
           }}
           className="py-[24px] px-[16px]  rounded-[10px] max-w-[1280px] mx-auto "
         >
-          <Box className="flex justify-between flex-col rounded-[10px] p-[24px] backdrop-blur-[20px] shadow-[0_0_10px_rgba(0,0,0,0.4)]">
+          <Box className="flex justify-between flex-col rounded-[10px] p-[24px] backdrop-blur-[50px] shadow-[0_0_10px_rgba(0,0,0,0.4)] bg:linear-gradient(to right, rgba(255, 255, 255, 1), rgba(255, 255, 255, 1))">
             <motion.div
               initial={{ opacity: 0, x: -100 }}
               animate={{ opacity: 1, x: 0 }}
@@ -71,7 +71,7 @@ const AboutUs = () => {
             </motion.div>
           </Box>
           <Box
-            className="px-[24px] rounded-[10px] shadow-[0_0_10px_rgba(0,0,0,0.2)] backdrop-blur-[20px]"
+            className="px-[24px] rounded-[10px] shadow-[0_0_10px_rgba(0,0,0,0.2)] bg:linear-gradient(to right, rgba(255, 255, 255, 1), rgba(255, 255, 255, 1))  backdrop-blur-[50px]"
             sx={{
               display: "flex",
               flexDirection: {

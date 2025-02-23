@@ -4,16 +4,11 @@ import GroupAddTwoToneIcon from "@mui/icons-material/GroupAddTwoTone";
 import ManageSearchIcon from "@mui/icons-material/ManageSearch";
 import NoteAddIcon from "@mui/icons-material/NoteAdd";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import {
-  Box,
-  CssBaseline,
-  extendTheme,
-  GlobalStyles,
-  ThemeProvider,
-} from "@mui/material";
+import { Box, CssBaseline, GlobalStyles, ThemeProvider } from "@mui/material";
 import { DashboardLayout } from "@toolpad/core";
 import { AppProvider, Navigation } from "@toolpad/core/AppProvider";
 import { Outlet } from "react-router-dom";
+import { toast } from "sonner";
 import customTheme from "../../../main";
 import { logout, selectCurrentUser } from "../../Redux/features/Auth/authSlice";
 import { useAppDispatch, useAppSelector } from "../../Redux/hook";
@@ -69,9 +64,6 @@ const UserNAVIGATION: Navigation = [
 export default function AdminLayout() {
   const user = useAppSelector(selectCurrentUser);
   const dispatch = useAppDispatch();
-  const demoTheme = extendTheme({
-    colorSchemes: { light: true, dark: false },
-  });
 
   return (
     <ThemeProvider theme={customTheme}>
@@ -94,7 +86,10 @@ export default function AdminLayout() {
       />
       <AppProvider
         authentication={{
-          signOut: () => dispatch(logout()),
+          signOut: () => {
+            dispatch(logout());
+            toast.success("Logged out successfully");
+          },
           signIn: () => {},
         }}
         session={{
@@ -105,11 +100,11 @@ export default function AdminLayout() {
             image: user?.user?.profileImage,
           },
         }}
-        theme={demoTheme}
+        theme={customTheme}
         branding={{
           title: `${user?.user?.role === "admin" ? "Admin" : "User"} Dashboard`,
           logo: "",
-          homeUrl: `${user?.user?.role}/dashboard`,
+          homeUrl: `/${user?.user?.role}/dashboard`,
         }}
         navigation={
           user?.user?.role === "admin" ? AdminNAVIGATION : UserNAVIGATION

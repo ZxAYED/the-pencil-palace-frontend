@@ -93,7 +93,7 @@ const routes = createBrowserRouter([
     ),
     children: [
       {
-        path: "/user/dashboard",
+        index: true,
         element: (
           <PrivateRoute>
             <UserDashboard></UserDashboard>
