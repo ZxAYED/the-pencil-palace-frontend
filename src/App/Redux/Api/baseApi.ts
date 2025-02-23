@@ -3,8 +3,8 @@ import { RootState } from "../store";
 
 
 const baseQuery = fetchBaseQuery({
-    // baseUrl: 'https://the-pencil-palace.onrender.com//api',
-    baseUrl: 'http://localhost:5000/api',
+    baseUrl: 'https://the-pencil-palace.onrender.com/api',
+    // baseUrl: 'http://localhost:5000/api',
     credentials: 'include',
     prepareHeaders: (headers, { getState }) => {
         const token = (getState() as RootState).auth?.token

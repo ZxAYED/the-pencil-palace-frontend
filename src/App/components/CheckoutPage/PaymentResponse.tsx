@@ -31,9 +31,9 @@ const PaymentResponse = () => {
   const [searchParams] = useSearchParams();
   const orderId = searchParams.get("order_id");
   const user = useAppSelector(selectCurrentUser);
-
+  console.log(orderId);
   const { data: orderInfo, isLoading, error } = useVerifyPaymentQuery(orderId);
-
+  console.log(orderInfo);
   const orderData = orderInfo?.data[0] || [];
   const { data: productInfo } = useGetSingleOrderOfUserQuery(orderId);
   const productData = productInfo?.data || [];
@@ -79,13 +79,14 @@ const PaymentResponse = () => {
             <Typography variant="h4" fontWeight="bold" color="#424242" my={4}>
               The Pencil Palace- Verify Payment
             </Typography>
-            {orderData.bank_status === "success" ? (
+            {orderData.bank_status === "Success" ||
+            orderData.bank_status === "success" ? (
               <>
                 <CheckCircleOutlineIcon
                   sx={{ fontSize: 50, color: "#7CB342", mb: 1 }}
                 />
                 <Typography variant="h5" fontWeight="bold" color="#7CB342">
-                  Payment Successful!
+                  Payment {orderData.bank_status} !
                 </Typography>
               </>
             ) : (
@@ -94,7 +95,7 @@ const PaymentResponse = () => {
                   sx={{ fontSize: 50, color: "#D32F2F", mb: 1 }}
                 />
                 <Typography variant="h5" fontWeight="bold" color="#D32F2F">
-                  Payment Pending
+                  Payment {orderData.bank_status} !
                 </Typography>
               </>
             )}

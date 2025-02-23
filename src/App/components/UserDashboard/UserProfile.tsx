@@ -1,11 +1,13 @@
 import { Box, Typography } from "@mui/material";
-import { selectCurrentUser } from "../../Redux/features/Auth/authSlice";
-import { useAppSelector } from "../../Redux/hook";
+import { toast } from "sonner";
+import { logout, selectCurrentUser } from "../../Redux/features/Auth/authSlice";
+import { useAppDispatch, useAppSelector } from "../../Redux/hook";
+import ZButton from "../../utils/ZButton";
 
 const UserProfile = () => {
   const data = useAppSelector(selectCurrentUser);
   const user = data?.user;
-
+  const dispatch = useAppDispatch();
   return (
     <Box
       sx={{
@@ -85,6 +87,15 @@ const UserProfile = () => {
         >
           📍 {user?.address || "No Address Provided"}
         </Typography>
+        <Box sx={{ mt: 2 }}>
+          <ZButton
+            onClick={() => {
+              toast.success("Logged out successfully");
+              dispatch(logout());
+            }}
+            name="Log Out"
+          ></ZButton>
+        </Box>
       </Box>
     </Box>
   );
