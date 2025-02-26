@@ -1,7 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { useDeleteProductMutation } from "../../Redux/features/products/productsApi";
-import LoadingAnimation from "../../utils/LoadingAnimation";
 import ListAltTwoToneIcon from "@mui/icons-material/ListAltTwoTone";
 import { motion } from "framer-motion";
 import { toast } from "sonner";
@@ -9,6 +7,7 @@ import {
   useAllUsersQuery,
   useDeleteUserMutation,
 } from "../../Redux/features/Auth/authApi";
+import LoadingAnimation from "../../utils/LoadingAnimation";
 import UpdateUser from "./UpdateUser";
 
 const UserManagement = () => {
@@ -19,7 +18,7 @@ const UserManagement = () => {
   });
   const [deleteUser, { isLoading: isDeleting }] = useDeleteUserMutation();
 
-  const users = data?.data || [];
+  const users = data?.data;
 
   const handleDelete = async (user: any) => {
     toast(

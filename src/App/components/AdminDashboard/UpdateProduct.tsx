@@ -182,12 +182,16 @@ const UpdateProduct = ({
                   label="Description"
                   name="description"
                   control={control}
+                  multiline={true}
+                  rows={4}
                   type="text"
                   placeholder={product.description}
                 />
                 <ZTextFieldOptional
                   label="Features"
                   name="features"
+                  multiline={true}
+                  rows={4}
                   control={control}
                   type="text"
                   placeholder={product.features}

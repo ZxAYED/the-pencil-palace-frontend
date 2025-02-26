@@ -7,7 +7,7 @@ const AdminOrderManagement = () => {
     refetchOnMountOrArgChange: true,
   });
 
-  const orders = data?.data || [];
+  const orders = data?.data;
 
   return (
     <div className="container mx-auto p-[16px]">

@@ -30,6 +30,7 @@ const ZRatingField = ({
         <TextField
           {...field}
           id={name}
+          defaultValue={placeholder || ""}
           label={label}
           type={type}
           variant="standard"

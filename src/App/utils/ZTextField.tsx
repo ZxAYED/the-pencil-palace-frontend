@@ -13,12 +13,16 @@ const ZTextField = ({
   type,
   control,
   placeholder,
+  multiline,
+  rows,
 }: {
   name: string;
   label: string;
   control?: Control<FieldValues, any>;
   placeholder?: string;
   type: string;
+  multiline?: boolean;
+  rows?: number;
 }) => {
   const { control: formControl } = useFormContext();
 
@@ -30,11 +34,14 @@ const ZTextField = ({
         <TextField
           {...field}
           id={name}
+          defaultValue=""
           label={label}
           type={type}
           variant="standard"
           fullWidth
+          multiline={multiline}
           required
+          rows={rows}
           sx={{ my: 1 }}
           placeholder={placeholder || ""}
           value={type === "file" ? value?.fileName : value}

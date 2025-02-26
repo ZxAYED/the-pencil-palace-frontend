@@ -101,12 +101,29 @@ const CreateProduct = () => {
 
             <ZTextField label="Price" name="price" type="number" />
             <ZSelect label="Category" name="category" options={categories} />
-            <ZTextField label="Description" name="description" type="text" />
-            <ZTextField label="Features" name="features" type="text" />
+            <ZTextField
+              multiline={true}
+              rows={4}
+              label="Description"
+              name="description"
+              type="text"
+            />
+            <ZTextField
+              multiline={true}
+              rows={4}
+              label="Features"
+              name="features"
+              type="text"
+            />
             <ZTextField label="Quantity" name="quantity" type="number" />
             <ZTextField label="Photo URL" name="profileImage" type="file" />
 
-            <ZRatingField label="Rating" name="rating" type="number" />
+            <ZRatingField
+              label="Rating"
+              name="rating"
+              type="number"
+              placeholder="5"
+            />
           </Box>
 
           <Box

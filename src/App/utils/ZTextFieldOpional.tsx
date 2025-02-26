@@ -2,9 +2,9 @@
 import { TextField } from "@mui/material";
 import {
   Control,
-  useFormContext,
   Controller,
   FieldValues,
+  useFormContext,
 } from "react-hook-form";
 
 const ZTextFieldOptional = ({
@@ -13,12 +13,16 @@ const ZTextFieldOptional = ({
   type,
   control,
   placeholder,
+  multiline,
+  rows,
 }: {
   name: string;
   label: string;
   control?: Control<FieldValues, any>;
   placeholder?: string;
   type: string;
+  multiline?: boolean;
+  rows?: number;
 }) => {
   const { control: formControl } = useFormContext();
 
@@ -31,9 +35,13 @@ const ZTextFieldOptional = ({
           {...field}
           id={name}
           label={label}
+          defaultValue={placeholder}
           type={type}
           variant="standard"
           fullWidth
+          multline={multiline}
+          rows={rows}
+          cols={50}
           placeholder={placeholder || ""}
           value={type === "file" ? value?.fileName : value}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
