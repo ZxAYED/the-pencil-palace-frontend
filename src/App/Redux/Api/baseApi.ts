@@ -5,9 +5,12 @@ import { logout, setUser } from "../features/Auth/authSlice";
 import { RootState } from "../store";
 
 
+// const baseUrl ='http://localhost:5000/api'
+const baseUrl = 'https://the-pencil-palace.onrender.com/api'
+
 const baseQuery = fetchBaseQuery({
-    // baseUrl: 'https://the-pencil-palace.onrender.com/api',
-    baseUrl: 'http://localhost:5000/api',
+
+    baseUrl: baseUrl,
     credentials: 'include',
     prepareHeaders: (headers, { getState }) => {
         const token = (getState() as RootState).auth?.token
@@ -35,7 +38,7 @@ const baseQueryWithRefreshToken: BaseQueryFn<
 
         console.log('Sending refresh token');
 
-        const res = await fetch('http://localhost:5000/api/auth/refresh-token', {
+        const res = await fetch(`${baseUrl}/auth/refresh-token`, {
             method: 'POST',
             credentials: 'include',
         });
