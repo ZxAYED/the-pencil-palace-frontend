@@ -4,17 +4,6 @@ import baseApi from "../../Api/baseApi";
 
 const orderApi = baseApi.injectEndpoints({
     endpoints: (builder) => ({
-
-        getOrders: builder.query({
-            query: (payload) => ({
-                url: "/orders",
-                method: "GET",
-                params: payload,
-            }),
-            providesTags: ["Order"],
-        }),
-
-
         addToCart: builder.mutation({
             query: (cart) => ({
 
@@ -31,6 +20,13 @@ const orderApi = baseApi.injectEndpoints({
 
             }),
             providesTags: ["Cart"],
+        }),
+        getAllOrders: builder.query({
+            query: () => ({
+                url: "/orders",
+                method: "GET",
+            }),
+            providesTags: ["Order"],
         }),
         getOrder: builder.query({
             query: (orderId) => ({
@@ -105,4 +101,4 @@ const orderApi = baseApi.injectEndpoints({
         }),
     })
 })
-export const { useGetOrdersQuery, useAddToCartMutation, useGetCartItemsQuery, useCreateOrderMutation, useRemoveFromCartMutation, useVerifyPaymentQuery, useMakePaymentMutation, useGetOrderQuery, useGenerateRevenueQuery, useGetOrderOfUserQuery, useRemoveOrderMutation, useGetSingleOrderOfUserQuery } = orderApi;
+export const { useGetAllOrdersQuery, useAddToCartMutation, useGetCartItemsQuery, useCreateOrderMutation, useRemoveFromCartMutation, useVerifyPaymentQuery, useMakePaymentMutation, useGetOrderQuery, useGenerateRevenueQuery, useGetOrderOfUserQuery, useRemoveOrderMutation, useGetSingleOrderOfUserQuery } = orderApi;

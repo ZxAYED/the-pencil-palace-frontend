@@ -1,11 +1,11 @@
 import { Box, Typography } from "@mui/material";
-import img1 from "../../../assets/writing.png";
-import img2 from "../../../assets/ofc.png";
-import img3 from "../../../assets/art.png";
-import img4 from "../../../assets/technology.png";
-import img5 from "../../../assets/educational.png";
 import { motion } from "framer-motion";
-
+import { Img } from "react-image";
+import img3 from "../../../assets/art.png";
+import img5 from "../../../assets/educational.png";
+import img2 from "../../../assets/ofc.png";
+import img4 from "../../../assets/technology.png";
+import img1 from "../../../assets/writing.png";
 const Categories = () => {
   return (
     <Box className="max-w-[1280px] !mx-auto">
@@ -47,7 +47,7 @@ const Categories = () => {
               transition={{ ease: "easeOut" }}
               className=" overflow-hidden"
             >
-              <img
+              <Img
                 src={img1}
                 className="rounded-[50%] h-[200px] w-[200px]"
                 alt="writing"
@@ -65,7 +65,7 @@ const Categories = () => {
               transition={{ ease: "easeOut" }}
               className=" overflow-hidden"
             >
-              <img
+              <Img
                 src={img2}
                 className="rounded-[50%] h-[200px] w-[200px]"
                 alt="office supplies"
@@ -82,7 +82,7 @@ const Categories = () => {
               transition={{ ease: "easeOut" }}
               className=" overflow-hidden"
             >
-              <img
+              <Img
                 src={img3}
                 className="rounded-[50%] h-[200px] w-[200px]"
                 alt="art supplies"
@@ -99,7 +99,7 @@ const Categories = () => {
               transition={{ ease: "easeOut" }}
               className=" overflow-hidden"
             >
-              <img
+              <Img
                 src={img4}
                 className="rounded-[50%] h-[200px] w-[200px]"
                 alt="technology"
@@ -116,7 +116,7 @@ const Categories = () => {
               transition={{ ease: "easeOut" }}
               className=" overflow-hidden"
             >
-              <img
+              <Img
                 src={img5}
                 className="rounded-[50%] h-[200px] w-[200px]"
                 alt="educational"

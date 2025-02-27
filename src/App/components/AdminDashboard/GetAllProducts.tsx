@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-
+import { Img } from "react-image";
 import {
   useDeleteProductMutation,
   useGetProductsForAdminQuery,
@@ -120,7 +120,7 @@ const GetAllProducts = () => {
                 {products?.map((product: any) => (
                   <tr key={product._id} className="">
                     <td className="px-[24px] py-[16px]">
-                      <img
+                      <Img
                         src={product.profileImage}
                         alt={product.name}
                         className="w-[80px] h-[80px] object-cover"

@@ -2,7 +2,7 @@
 import { Box, Drawer, Typography } from "@mui/material";
 import { Fragment, useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
-
+import { Img } from "react-image";
 import ZForm from "../../utils/ZForm";
 
 import { toast } from "sonner";
@@ -130,7 +130,7 @@ const UpdateProduct = ({
                     gap: "24px",
                   }}
                 >
-                  <img
+                  <Img
                     src={product?.profileImage}
                     alt={product?.name}
                     className="w-[100px] h-[100px] rounded-[6px]"

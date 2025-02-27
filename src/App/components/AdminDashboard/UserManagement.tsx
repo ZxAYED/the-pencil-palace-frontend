@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-
 import ListAltTwoToneIcon from "@mui/icons-material/ListAltTwoTone";
 import { motion } from "framer-motion";
+import { Img } from "react-image";
 import { toast } from "sonner";
 import {
   useAllUsersQuery,
@@ -75,7 +75,7 @@ const UserManagement = () => {
         </div>
       ) : (
         <div className="!mb-[120px] container mx-auto rounded-2xl shadow-lg">
-          <h2 className="text-[28px] font-[700] flex items-center gap-[16px] justify-between">
+          <h2 className="!text-[28px] font-[700] flex items-center gap-[16px] justify-between">
             <span className="flex items-center ">
               User List <ListAltTwoToneIcon />
             </span>
@@ -116,7 +116,7 @@ const UserManagement = () => {
                 {users?.map((user: any) => (
                   <tr key={user._id}>
                     <td className="px-[24px] py-[16px]">
-                      <img
+                      <Img
                         src={user.profileImage}
                         alt={user.name}
                         className="w-[80px] h-[80px] object-cover rounded-full"

@@ -1,3 +1,4 @@
+import { Img } from "react-image";
 import { Autoplay, Navigation, Pagination } from "swiper";
 import "swiper/css"; // Import core Swiper styles
 import "swiper/css/navigation";
@@ -7,7 +8,6 @@ import img2 from "../../../assets/Cinematic Flat Lay of iPhone and Artistic Supp
 import img4 from "../../../assets/IPhone Surrounded By Artistic Supplies In A Creative Setup.png";
 import img1 from "../../../assets/pencil palace banner.webp";
 import img3 from "../../../assets/Serene Flat Lay of Artistic Supplies with iPhone Display.png";
-
 const Banner = () => {
   return (
     <Swiper
@@ -27,16 +27,16 @@ const Banner = () => {
       navigation={true}
     >
       <SwiperSlide>
-        <img src={img1} alt="banner 1" className="object-fill w-full h-full" />
+        <Img src={img1} alt="banner 1" className="object-fill w-full h-full" />
       </SwiperSlide>
       <SwiperSlide>
-        <img src={img2} alt="banner 2" className="object-fill w-full h-full" />
+        <Img src={img2} alt="banner 2" className="object-fill w-full h-full" />
       </SwiperSlide>
       <SwiperSlide>
-        <img src={img3} alt="banner 3" className="object-fill w-full h-full" />
+        <Img src={img3} alt="banner 3" className="object-fill w-full h-full" />
       </SwiperSlide>
       <SwiperSlide>
-        <img src={img4} alt="banner 4" className="object-fill w-full h-full" />
+        <Img src={img4} alt="banner 4" className="object-fill w-full h-full" />
       </SwiperSlide>
     </Swiper>
   );

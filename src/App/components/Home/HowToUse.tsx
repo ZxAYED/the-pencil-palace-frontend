@@ -1,11 +1,12 @@
-import { Box, Typography } from "@mui/material";
-import img from "../../../assets/howtoUse.png";
 import {
   AddShoppingCart,
   LocalShipping,
   Payment,
   Search,
 } from "@mui/icons-material";
+import { Box, Typography } from "@mui/material";
+import { Img } from "react-image";
+import img from "../../../assets/howtoUse.png";
 const HowToUse = () => {
   return (
     <Box
@@ -95,7 +96,7 @@ const HowToUse = () => {
             }}
             className=" w-[40%]"
           >
-            <img
+            <Img
               src={img}
               alt="3D Model"
               className="w-full h-[40vh] flex-1 object-cover"

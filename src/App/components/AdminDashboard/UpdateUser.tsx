@@ -2,6 +2,7 @@
 import { Box, Divider, Drawer, Typography } from "@mui/material";
 import { Fragment, useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import { Img } from "react-image";
 import { toast } from "sonner";
 import { useUpdateUserMutation } from "../../Redux/features/Auth/authApi";
 import LoadingAnimation from "../../utils/LoadingAnimation";
@@ -109,7 +110,7 @@ const UpdateUser = ({ user, refetch }: { user: any; refetch: () => void }) => {
                   mx: "auto",
                 }}
               >
-                <img
+                <Img
                   src={user?.profileImage}
                   alt={user?.name}
                   className="w-[200px] h-[200px] rounded-[6px]"

@@ -1,11 +1,11 @@
 import VerifiedIcon from "@mui/icons-material/Verified";
 import { Box, Button, Typography } from "@mui/material";
 import { motion } from "framer-motion";
+import { Img } from "react-image";
 import { Link } from "react-router-dom";
 import bg from "../../../assets/aboutUs2.webp";
 import img from "../../../assets/logo.webp";
 import img2 from "../../../assets/ofc.png";
-
 const AboutUs = () => {
   return (
     <Box
@@ -215,7 +215,7 @@ const AboutUs = () => {
                 alignItems: "center",
               }}
             >
-              <img
+              <Img
                 src={img2}
                 className="w-[80%] h-[80%] rounded-[10px]"
                 alt="aboutUs"
@@ -441,7 +441,7 @@ const AboutUs = () => {
               }}
               className="flex justify-center items-center w-[20%] h-[20%]"
             >
-              <img
+              <Img
                 src={img}
                 alt="Zayed Iqbal"
                 className="  drop-shadow-[0_0_10px_rgba(0,0,0,0.5)] w-[100%] h-[100%]"

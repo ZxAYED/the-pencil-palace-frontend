@@ -2,8 +2,8 @@
 import { Box, Typography } from "@mui/material";
 import { Rating, Star } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
+import { Img } from "react-image";
 import { Link } from "react-router-dom";
-
 const Card = ({ product }: any) => {
   const customStarStyles = {
     itemShapes: Star,
@@ -21,7 +21,7 @@ const Card = ({ product }: any) => {
         className="flex flex-col w-full items-center  h-[500px]  space-y-[16px] border-[1px] border-[#2e2e2e] Zcard  rounded-[8px] !box-border "
       >
         <Box className="mx-auto mt-[48px]  w-[300px] h-[200px] ">
-          <img
+          <Img
             src={product?.profileImage}
             alt={product?.name}
             className="!w-[300px] !mx-auto !h-[200px] object-cover rounded-[6px] "

@@ -1,4 +1,5 @@
 import { Box, Typography } from "@mui/material";
+import { Img } from "react-image";
 import { toast } from "sonner";
 import { logout, selectCurrentUser } from "../../Redux/features/Auth/authSlice";
 import { useAppDispatch, useAppSelector } from "../../Redux/hook";
@@ -34,7 +35,7 @@ const UserProfile = () => {
           mb: 2,
         }}
       >
-        <img
+        <Img
           src={user?.profileImage}
           alt={user?.name}
           style={{

@@ -1,13 +1,17 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useGetOrdersQuery } from "../../Redux/features/orders/orderApi";
+import { useGetAllOrdersQuery } from "../../Redux/features/orders/orderApi";
 import LoadingAnimation from "../../utils/LoadingAnimation";
 
 const AdminOrderManagement = () => {
-  const { data, isLoading, isFetching } = useGetOrdersQuery(undefined, {
+  const { data, isLoading, isFetching } = useGetAllOrdersQuery("", {
     refetchOnMountOrArgChange: true,
   });
 
-  const orders = data?.data;
+  const orders = data?.data || [];
+
+  if (isLoading || isFetching) {
+    return <LoadingAnimation></LoadingAnimation>;
+  }
 
   return (
     <div className="container mx-auto p-[16px]">

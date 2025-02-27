@@ -3,6 +3,7 @@ import { Box, Button, Divider, Typography } from "@mui/material";
 import { Rating, Star } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
 import { useState } from "react";
+import { Img } from "react-image";
 import { Link, Navigate, useParams } from "react-router-dom";
 import { toast } from "sonner";
 import { selectCurrentUser } from "../../Redux/features/Auth/authSlice";
@@ -11,7 +12,6 @@ import { useGetProductByIdQuery } from "../../Redux/features/products/productsAp
 import { useAppSelector } from "../../Redux/hook";
 import LoadingAnimation from "../../utils/LoadingAnimation";
 import QuantitySelector from "./QuantitySelector";
-
 const ProductInfo = () => {
   const { id } = useParams();
   const { data, isLoading, error, refetch } = useGetProductByIdQuery(id, {
@@ -110,7 +110,7 @@ const ProductInfo = () => {
             marginTop: "16px",
           }}
         >
-          <img
+          <Img
             src={data?.data?.profileImage}
             alt={data?.data?.name}
             style={{

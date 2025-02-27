@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-
 import {
   AppBar,
   Avatar,
@@ -14,6 +13,7 @@ import {
   Menu,
   Toolbar,
 } from "@mui/material";
+import { Img } from "react-image";
 
 import { Menu as MenuIcon } from "@mui/icons-material";
 import { useState } from "react";
@@ -73,13 +73,13 @@ function NavBar() {
       }}
     >
       {user?.user ? (
-        <img
+        <Img
           alt="Profile"
           className="w-[100%] h-[40dvh]"
           src={user.user.profileImage}
         />
       ) : (
-        <img src={logo} alt="logo" className="w-[100%] h-[40dvh]" />
+        <Img src={logo} alt="logo" className="w-[100%] h-[40dvh]" />
       )}
 
       <List>
@@ -254,7 +254,7 @@ function NavBar() {
                   }}
                 >
                   {user?.user?.profileImage ? (
-                    <img
+                    <Img
                       alt="Profile"
                       className="h-[50px] w-[50px] rounded-full"
                       src={user.user.profileImage}
@@ -277,7 +277,7 @@ function NavBar() {
                 >
                   <Box className="mx-[10px] flex justify-between items-center gap-[16px] !mb-[16px]">
                     <Box className="flex items-center  ">
-                      <img
+                      <Img
                         src={user?.user?.profileImage}
                         alt="profile"
                         className="w-[50px] h-[50px] rounded-full"

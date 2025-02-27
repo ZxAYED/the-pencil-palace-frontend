@@ -168,7 +168,7 @@ const PaymentPage = () => {
               },
             }}
           >
-            <img
+            <Img
               src={img}
               alt="payment"
               className="w-[400px] rounded-[6px] object-fill"
